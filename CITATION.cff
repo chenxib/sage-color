@@ -5,6 +5,7 @@ authors:
   - name: "Anonymous Author(s)"
 year: 2026
 type: software
+license: CC-BY-4.0
 repository-code: "https://github.com/chenxib/sage-color"
 url: "https://github.com/chenxib/sage-color"
 abstract: "SAGE-Color is an MMDiT-based flow-matching editor for semantic appearance grounding in reference-based color transfer."

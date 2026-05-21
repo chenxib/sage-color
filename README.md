@@ -23,7 +23,7 @@ The earlier three-stage experimental plan is not part of this release.
 
 ## Links
 
-- Project page: [`docs/index.html`](docs/index.html)
+- Project page: <https://chenxib.github.io/sage-color/>
 - Code entrypoints: [`scripts/stage1_training`](scripts/stage1_training) and
   [`scripts/final_model`](scripts/final_model)
 - GitHub repository: <https://github.com/chenxib/sage-color>
@@ -34,6 +34,7 @@ The earlier three-stage experimental plan is not part of this release.
 ```text
 .
 ├── README.md
+├── LICENSE
 ├── CITATION.cff
 ├── requirements.txt
 ├── environment.yml
@@ -65,21 +66,25 @@ authority. SAGE-Color separates the problem into three paths:
   from achromatic statistics, depth, and optional segmentation/panoptic priors
   to protect structure-sensitive regions.
 
-## Environment
+## Fresh Clone Setup
 
 Python 3.11 and a CUDA-capable NVIDIA GPU are expected. The default mixed
-precision is `bf16`.
+precision is `bf16`. Run the setup commands from the repository root.
 
 ```bash
+git clone https://github.com/chenxib/sage-color.git
+cd sage-color
+
 conda env create -f environment.yml
 conda activate zhuise-color-edit
 bash scripts/bootstrap_external_diffusers.sh
 pip install -r requirements.txt
 ```
 
-`requirements.txt` expects the pinned Diffusers checkout under
-`external/diffusers`, which is created by
-`scripts/bootstrap_external_diffusers.sh`.
+`environment.yml` only creates the Python environment. The editable Diffusers
+install is intentionally kept in `requirements.txt`, because
+`external/diffusers` does not exist until `scripts/bootstrap_external_diffusers.sh`
+has run.
 
 ## Required External Models
 
@@ -207,14 +212,16 @@ For a minimal smoke run on limited memory, set `RESOLUTION=128` or
 ## Project Page Assets
 
 The static project page in [`docs/`](docs) includes lightweight preview images
-derived from the project figures. The original paper source is intentionally not
-included in this code repository.
+derived only from figures used in the paper package. The original paper source
+is intentionally not included in this code repository.
 
 ## License And Data Notes
+
+This project is released under the
+[Creative Commons Attribution 4.0 International License](LICENSE).
 
 This code release depends on third-party model licenses, including Stable
 Diffusion 3.5 Medium and the feature extractors listed in
 [`model/README.md`](model/README.md). The Colorist-200K and Colorist-Bench-1K
 assets are described in the paper, but full redistribution may be restricted by
-the authors' data-use agreements. Add the final project license before public
-release if a permissive code license is intended.
+the authors' data-use agreements.

@@ -1,7 +1,10 @@
 # SAGE-Color Project Page
 
-Open `index.html` directly in a browser, or configure GitHub Pages to serve this
-`docs/` directory.
+This directory is served by GitHub Pages:
+
+```text
+https://chenxib.github.io/sage-color/
+```
 
 Update these links before a public release:
 
