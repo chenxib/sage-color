@@ -240,9 +240,9 @@ For a minimal smoke run on limited memory, set `RESOLUTION=128` or
 
 ## Project Page Assets
 
-The static project page in [`docs/`](docs) includes lightweight preview images
-derived only from figures used in the paper package. The original paper source
-is intentionally not included in this code repository.
+The static project page in [`docs/`](docs) includes only original figure files
+copied from the provided paper package. The original paper source is
+intentionally not included in this code repository.
 
 ## License And Data Notes
 

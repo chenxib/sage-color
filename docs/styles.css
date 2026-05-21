@@ -166,6 +166,20 @@ figure img {
   background: #ffffff;
 }
 
+.pdf-figure object {
+  display: block;
+  width: 100%;
+  height: 760px;
+  background: #ffffff;
+  border: 0;
+}
+
+.pdf-figure a {
+  display: block;
+  padding: 32px;
+  color: var(--accent);
+}
+
 figcaption {
   padding: 14px 16px;
   color: var(--muted);
@@ -300,6 +314,10 @@ footer {
   .split,
   .metrics {
     grid-template-columns: 1fr;
+  }
+
+  .pdf-figure object {
+    height: 520px;
   }
 
   .actions {
