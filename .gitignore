@@ -5,6 +5,8 @@ __pycache__/
 external/
 model/*
 !model/README.md
+checkpoints/*
+!checkpoints/README.md
 datasets/*
 !datasets/README.md
 outputs/

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Usage:
-#   CHECKPOINT=outputs/.../checkpoint-100/color_edit_final.pt \
+#   CHECKPOINT=checkpoints/sage-color-final.pt \
 #   CONTENT_IMAGE=path/to/content.png \
 #   REFERENCE_IMAGE=path/to/reference.png \
 #   OUTPUT_IMAGE=outputs/sample.png \
@@ -13,7 +13,7 @@ set -euo pipefail
 #   correspondence online on the selected GPU.
 # - SAVE_CORR_CACHE=path/to/cache.npz saves the online correspondence for reuse.
 # - CLEANDIFT_VAE defaults to the checkpoint config, then stabilityai/sd-vae-ft-mse.
-# - DISABLE_CLEANDIFT=1 runs the DINO+SigLIP ablation and is not full final model.
+# - DISABLE_CLEANDIFT=1 runs reduced correspondence without CleanDIFT.
 # - RESOLUTION is optional. If empty, the script uses the checkpoint resolution.
 #   Set RESOLUTION=1024 or RESOLUTION=512 only when you want to override it.
 # - NUM_INFERENCE_STEPS=28 is a normal-quality default; use 1-4 only for smoke tests.
@@ -25,10 +25,10 @@ if [[ -z "${CUDA_VISIBLE_DEVICES:-}" ]]; then
 fi
 
 PRETRAINED_MODEL="${PRETRAINED_MODEL:-model/stable-diffusion-3.5-medium}"
-CHECKPOINT="${CHECKPOINT:-outputs/final-model/checkpoint-100/color_edit_final.pt}"
+CHECKPOINT="${CHECKPOINT:-checkpoints/sage-color-final.pt}"
 CONTENT_IMAGE="${CONTENT_IMAGE:-datasets/validation/content.png}"
 REFERENCE_IMAGE="${REFERENCE_IMAGE:-datasets/validation/reference.png}"
-OUTPUT_IMAGE="${OUTPUT_IMAGE:-outputs/final-model/sample.png}"
+OUTPUT_IMAGE="${OUTPUT_IMAGE:-outputs/sage-color/sample.png}"
 CORR_CACHE="${CORR_CACHE:-}"
 SAVE_CORR_CACHE="${SAVE_CORR_CACHE:-}"
 DINO_MODEL="${DINO_MODEL:-model/dinov2-large}"

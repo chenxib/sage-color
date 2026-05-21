@@ -1,6 +1,6 @@
-# Stage I Reference Training
+# Color Grounding Training
 
-This stage is the released v1.1 reference-grounding stage. It trains the
+This is the first pass in the recommended training recipe. It trains the
 reference-guided color editing backbone and learns how to combine the content
 latent with reference appearance tokens and correspondence-guided attention.
 
@@ -50,4 +50,5 @@ outputs/stage1/checkpoint-<step>/color_edit_stage1.pt
 - Dense correspondence from DINOv2 and CleanDIFT features.
 - Global, region, and local sparse reference attention.
 
-The model weights saved here are the required initialization for the final training stage.
+The model weights saved here are the required initialization for final model
+training.

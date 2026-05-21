@@ -8,22 +8,23 @@ the reference palette, tone, contrast, and region-level chromatic appearance
 while preserving the content image's geometry, identity, layout, and fine
 structure.
 
-This folder is the standalone release project distilled from the larger
-research workspace. It intentionally contains the final two-stage recipe only:
+This is the standalone release project. For users who only want to apply the
+released model, inference is a single checkpoint-based command: provide a
+content image, a reference image, and the released SAGE-Color checkpoint.
 
-1. **Stage I / v1.1 reference grounding** trains the reference-guided color
-   editing backbone with dense content-latent conditioning, DINOv2 + CleanDIFT
-   correspondence, SigLIP2 semantic gating, and global/region/local reference
-   attention.
-2. **Stage II / v3.5 final model** initializes from the Stage-I checkpoint,
-   activates the content-only Intrinsic Preservation Field, and applies the
-   Stage-II Lab(a/b) chroma calibration loss.
+For researchers who want to reproduce training, we recommend a two-stage
+training recipe:
 
-The earlier three-stage experimental plan is not part of this release.
+1. Train a reference color-grounding checkpoint with content-latent
+   conditioning, DINOv2 + CleanDIFT correspondence, SigLIP2 semantic gating, and
+   global/region/local reference attention.
+2. Continue from that checkpoint and train the final structure-preserving model
+   with the content-only Intrinsic Preservation Field and Lab(a/b) chroma
+   calibration loss.
 
 ## Links
 
-- Project page: <https://chenxib.github.io/sage-color/>
+- Project page source: [`docs/index.html`](docs/index.html)
 - Code entrypoints: [`scripts/stage1_training`](scripts/stage1_training) and
   [`scripts/final_model`](scripts/final_model)
 - GitHub repository: <https://github.com/chenxib/sage-color>
@@ -40,13 +41,14 @@ The earlier three-stage experimental plan is not part of this release.
 ├── environment.yml
 ├── docs/                         # static project page
 ├── model/README.md               # expected external model-weight paths
+├── checkpoints/README.md         # released checkpoint placement
 ├── datasets/README.md            # expected JSONL format and data notes
 └── scripts/
     ├── bootstrap_external_diffusers.sh
     ├── download_required_models.sh
     ├── resolve_runtime.sh
-    ├── stage1_training/          # Stage I / v1.1 release code
-    └── final_model/              # Stage II / v3.5 final release code
+    ├── stage1_training/          # reference color-grounding training code
+    └── final_model/              # final training and inference code
 ```
 
 Weights, datasets, checkpoints, generated outputs, and the local Diffusers
@@ -96,6 +98,33 @@ logging in with `hf auth login`, run:
 bash scripts/download_required_models.sh
 ```
 
+## Released Checkpoint
+
+Put the released SAGE-Color checkpoint here:
+
+```text
+checkpoints/sage-color-final.pt
+```
+
+No code change is needed if you use that filename. The inference wrapper uses it
+as the default `CHECKPOINT`.
+
+If you also provide the first training-stage checkpoint for continued training,
+put it here:
+
+```text
+checkpoints/sage-color-grounding.pt
+```
+
+The final-training wrapper uses that as the default
+`INIT_FROM_STAGE1_CHECKPOINT`. If your files live elsewhere, override the
+environment variables:
+
+```bash
+CHECKPOINT=/path/to/final.pt bash scripts/final_model/bash/infer.sh
+INIT_FROM_STAGE1_CHECKPOINT=/path/to/grounding.pt bash scripts/final_model/bash/train_single_gpu.sh
+```
+
 ## Data Format
 
 Training uses JSONL. Each row should contain a content image, a reference image,
@@ -113,7 +142,7 @@ Batch inference also accepts:
 
 Relative paths are resolved from the repository root.
 
-## Stage I Training
+## Recommended Training: Color Grounding
 
 Single GPU:
 
@@ -144,20 +173,20 @@ CHECKPOINTING_STEPS=500 \
 bash scripts/stage1_training/bash/train_multi_gpu.sh
 ```
 
-Stage I saves:
+This training pass saves:
 
 ```text
 outputs/stage1/checkpoint-<step>/color_edit_stage1.pt
 ```
 
-## Stage II Final Training
+## Recommended Training: Final Model
 
-Continue from the Stage-I checkpoint:
+Continue from the color-grounding checkpoint:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 \
 TRAIN_JSONL=datasets/train.jsonl \
-INIT_FROM_STAGE1_CHECKPOINT=outputs/stage1/checkpoint-10000/color_edit_stage1.pt \
+INIT_FROM_STAGE1_CHECKPOINT=checkpoints/sage-color-grounding.pt \
 OUTPUT_DIR=outputs/final-model \
 RESOLUTION=1024 \
 TRAIN_BATCH_SIZE=2 \
@@ -175,7 +204,7 @@ Multi GPU:
 CUDA_VISIBLE_DEVICES=0,1,2,3 \
 NUM_PROCESSES=4 \
 TRAIN_JSONL=datasets/train.jsonl \
-INIT_FROM_STAGE1_CHECKPOINT=outputs/stage1-ddp/checkpoint-10000/color_edit_stage1.pt \
+INIT_FROM_STAGE1_CHECKPOINT=checkpoints/sage-color-grounding.pt \
 OUTPUT_DIR=outputs/final-model-ddp \
 RESOLUTION=1024 \
 TRAIN_BATCH_SIZE=2 \
@@ -197,10 +226,10 @@ outputs/final-model/checkpoint-<step>/color_edit_final.pt
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 \
-CHECKPOINT=outputs/final-model/checkpoint-10000/color_edit_final.pt \
+CHECKPOINT=checkpoints/sage-color-final.pt \
 CONTENT_IMAGE=path/to/content.png \
 REFERENCE_IMAGE=path/to/reference.png \
-OUTPUT_IMAGE=outputs/final-model/sample.png \
+OUTPUT_IMAGE=outputs/sage-color/sample.png \
 NUM_INFERENCE_STEPS=28 \
 bash scripts/final_model/bash/infer.sh
 ```

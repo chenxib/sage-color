@@ -1,10 +1,7 @@
 # SAGE-Color Project Page
 
-This directory is served by GitHub Pages:
-
-```text
-https://chenxib.github.io/sage-color/
-```
+This directory contains the static project page source. Serve it with GitHub
+Pages when the repository is public, or open `index.html` from a local checkout.
 
 Update these links before a public release:
 

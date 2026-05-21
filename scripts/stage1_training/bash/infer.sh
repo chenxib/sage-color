@@ -25,7 +25,7 @@ if [[ -z "${CUDA_VISIBLE_DEVICES:-}" ]]; then
 fi
 
 PRETRAINED_MODEL="${PRETRAINED_MODEL:-model/stable-diffusion-3.5-medium}"
-CHECKPOINT="${CHECKPOINT:-outputs/stage1/checkpoint-100/color_edit_stage1.pt}"
+CHECKPOINT="${CHECKPOINT:-checkpoints/sage-color-grounding.pt}"
 CONTENT_IMAGE="${CONTENT_IMAGE:-datasets/validation/content.png}"
 REFERENCE_IMAGE="${REFERENCE_IMAGE:-datasets/validation/reference.png}"
 OUTPUT_IMAGE="${OUTPUT_IMAGE:-outputs/stage1/sample.png}"

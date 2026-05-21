@@ -6,7 +6,7 @@ set -euo pipefail
 #
 # Common overrides:
 #   TRAIN_JSONL=datasets/train.jsonl \
-#   INIT_FROM_STAGE1_CHECKPOINT=outputs/stage1/checkpoint-57000/color_edit_stage1.pt \
+#   INIT_FROM_STAGE1_CHECKPOINT=checkpoints/sage-color-grounding.pt \
 #   OUTPUT_DIR=outputs/final-model-online-smoke \
 #   RESOLUTION=256 LORA_RANK=16 MAX_TRAIN_STEPS=1 CHECKPOINTING_STEPS=1 NUM_WORKERS=0 \
 #   bash scripts/final_model/bash/train_single_gpu.sh
@@ -20,12 +20,12 @@ set -euo pipefail
 #   If you hit OOM, first reduce RESOLUTION or use fewer validation steps.
 # - CLEANDIFT_VAE defaults to stabilityai/sd-vae-ft-mse. The first run
 #   may download the SD2.1 VAE unless you point it to a local SD2.1 folder.
-# - DISABLE_CLEANDIFT=1 runs the DINO+SigLIP ablation and is not full final model.
+# - DISABLE_CLEANDIFT=1 runs reduced correspondence without CleanDIFT.
 # - CHECKPOINTING_STEPS controls both checkpoint saves and validation_sample.png.
 # - Set DISABLE_CHECKPOINT_VALIDATION=1 to skip validation image generation.
 # - VALIDATION_CORR_CACHE is optional; when empty, validation also computes
 #   correspondence online.
-# - final model continues from a stage-1 checkpoint and adds the Stage-II Lab(a/b) color loss.
+# - final model continues from a color-grounding checkpoint and adds the Lab(a/b) color loss.
 
 source scripts/resolve_runtime.sh
 
@@ -36,10 +36,10 @@ fi
 PRETRAINED_MODEL="${PRETRAINED_MODEL:-model/stable-diffusion-3.5-medium}"
 TRAIN_JSONL="${TRAIN_JSONL:-datasets/train.jsonl}"
 OUTPUT_DIR="${OUTPUT_DIR:-outputs/final-model}"
-INIT_FROM_STAGE1_CHECKPOINT="${INIT_FROM_STAGE1_CHECKPOINT:-}"
+INIT_FROM_STAGE1_CHECKPOINT="${INIT_FROM_STAGE1_CHECKPOINT:-checkpoints/sage-color-grounding.pt}"
 
 if [[ -z "${INIT_FROM_STAGE1_CHECKPOINT}" ]]; then
-  echo "ERROR: final model requires INIT_FROM_STAGE1_CHECKPOINT=/path/to/stage-1/color_edit_stage1.pt" >&2
+  echo "ERROR: final model requires INIT_FROM_STAGE1_CHECKPOINT=/path/to/color-grounding.pt" >&2
   exit 2
 fi
 

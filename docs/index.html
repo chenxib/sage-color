@@ -71,12 +71,12 @@
         </div>
         <div class="notes">
           <div>
-            <strong>Stage I / v1.1</strong>
-            <span>Reference grounding with dense correspondence and gallery attention.</span>
+            <strong>Single-checkpoint inference</strong>
+            <span>Use the released final checkpoint with one content image and one reference image.</span>
           </div>
           <div>
-            <strong>Stage II / v3.5</strong>
-            <span>Final continuation training with structure protection and Lab(a/b) color loss.</span>
+            <strong>Recommended training</strong>
+            <span>Train color grounding first, then continue training the final structure-preserving model.</span>
           </div>
         </div>
       </section>
@@ -110,8 +110,9 @@
       <section class="section code" id="code">
         <h2>Code Release</h2>
         <p>
-          The repository contains the two-stage training and inference code,
-          environment files, setup scripts, and this project page. It does not
+          The repository contains single-checkpoint inference, the recommended
+          two-stage training recipe, environment files, setup scripts, and this
+          project page. It does not
           include the paper source, private datasets, model checkpoints, or
           generated outputs.
         </p>
@@ -120,7 +121,14 @@ cd sage-color
 conda env create -f environment.yml
 conda activate zhuise-color-edit
 bash scripts/bootstrap_external_diffusers.sh
-pip install -r requirements.txt</code></pre>
+pip install -r requirements.txt
+
+# Put the released checkpoint at checkpoints/sage-color-final.pt
+CUDA_VISIBLE_DEVICES=0 \
+CONTENT_IMAGE=path/to/content.png \
+REFERENCE_IMAGE=path/to/reference.png \
+OUTPUT_IMAGE=outputs/sage-color/sample.png \
+bash scripts/final_model/bash/infer.sh</code></pre>
       </section>
     </main>
 
