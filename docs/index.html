@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SAGE-Color | Semantic Appearance Grounding</title>
+    <meta
+      name="description"
+      content="SAGE-Color is an MMDiT-based reference color transfer model that grounds reference appearance semantically while preserving content structure."
+    />
+    <meta property="og:title" content="SAGE-Color" />
+    <meta
+      property="og:description"
+      content="Semantic Appearance Grounding for Reference-Based Color Transfer."
+    />
+    <meta property="og:image" content="assets/teaser.jpg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="SAGE-Color home">SAGE-Color</a>
+      <nav class="nav-links">
+        <a href="#method">Method</a>
+        <a href="#training">Training</a>
+        <a href="#results">Results</a>
+        <a href="#release">Release</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="assets/teaser.jpg" alt="" aria-hidden="true" />
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Reference-Based Color Transfer</p>
+          <h1 id="hero-title">SAGE-Color</h1>
+          <p class="hero-subtitle">
+            Semantic Appearance Grounding for transferring reference palette, tone,
+            contrast, and region-level color appearance without giving the reference
+            image spatial authority.
+          </p>
+          <div class="hero-actions" aria-label="Project links">
+            <a class="button primary" href="https://github.com/chenxib/sage-color">
+              GitHub
+            </a>
+            <a class="button" href="https://arxiv.org/">arXiv Pending</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary-band" aria-label="Project summary">
+        <div class="summary-grid">
+          <article class="metric">
+            <span class="metric-value">95.33</span>
+            <span class="metric-label">FG-CES on Colorist-Bench-1K</span>
+          </article>
+          <article class="metric">
+            <span class="metric-value">6.47</span>
+            <span class="metric-label">DeltaE00 against expert targets</span>
+          </article>
+          <article class="metric">
+            <span class="metric-value">23.99</span>
+            <span class="metric-label">PSNR for content-compatible reconstruction</span>
+          </article>
+          <article class="metric">
+            <span class="metric-value">2 stages</span>
+            <span class="metric-label">v1.1 reference grounding into v3.5 final model</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section two-column" id="problem">
+        <div>
+          <p class="section-kicker">Core contract</p>
+          <h2>Reference color, content structure.</h2>
+          <p>
+            A reference image is useful because it can express color intent that text
+            cannot: skin rendition, filmic contrast, local palette, and the mood of a
+            professionally graded frame.
+          </p>
+          <p>
+            The same reference is dangerous because its objects, texture, lighting,
+            and layout can leak into the output. SAGE-Color treats this as semantic
+            appearance grounding: reference regions provide chromatic evidence, while
+            the content image remains the only spatial anchor.
+          </p>
+        </div>
+        <div class="principle-list" aria-label="Design principles">
+          <article class="principle">
+            <span class="principle-index">01</span>
+            <h3>Chromatic authority</h3>
+            <p>The reference controls palette, tone, contrast, and region-level color.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-index">02</span>
+            <h3>No spatial authority</h3>
+            <p>Identity, boundaries, layout, material detail, and texture stay with content.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-index">03</span>
+            <h3>Semantic placement</h3>
+            <p>Reference colors are routed to plausible content regions, not copied as a warp.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section image-section" id="method">
+        <div class="section-heading">
+          <p class="section-kicker">Architecture</p>
+          <h2>Semantic Color Gallery plus Intrinsic Preservation Field.</h2>
+          <p>
+            SAGE-Color separates reference appearance, content geometry, and
+            content-only structure protection inside the MMDiT denoising process.
+          </p>
+        </div>
+        <figure class="paper-figure">
+          <img src="assets/overview.jpg" alt="SAGE-Color architecture overview with content path, semantic color gallery, and intrinsic preservation field." />
+          <figcaption>
+            The content latent anchors spatial support. The Semantic Color Gallery
+            exposes global, regional, and local reference color evidence. The
+            Intrinsic Preservation Field attenuates unsafe regional and local residuals.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section method-grid" aria-label="Method details">
+        <article class="method-card">
+          <h3>Dense Content Path</h3>
+          <p>
+            The noisy target latent and the content latent are concatenated before
+            SD3.5 MMDiT processing, keeping the edit spatially anchored to content.
+          </p>
+        </article>
+        <article class="method-card">
+          <h3>Semantic Color Gallery</h3>
+          <p>
+            SigLIP2, DINOv2, CleanDIFT, and Lab statistics build global, regional,
+            and local reference evidence indexed by semantic correspondence.
+          </p>
+        </article>
+        <article class="method-card">
+          <h3>Intrinsic Preservation Field</h3>
+          <p>
+            Achromatic content cues, depth, and optional structure priors produce
+            masks and anchors that protect structure-sensitive regions.
+          </p>
+        </article>
+      </section>
+
+      <section class="section training" id="training">
+        <div class="section-heading compact">
+          <p class="section-kicker">Final release recipe</p>
+          <h2>Two stages, not the earlier three-stage plan.</h2>
+          <p>
+            The released project keeps the path that was selected after experimentation:
+            v1.1 reference grounding followed by v3.5 final continuation training.
+          </p>
+        </div>
+        <div class="timeline" aria-label="Training timeline">
+          <article class="timeline-step">
+            <span class="step-label">Stage I / v1.1</span>
+            <h3>Learn semantic reference grounding</h3>
+            <p>
+              Train the color editing backbone with content-latent concatenation,
+              DINOv2 + CleanDIFT dense matching, SigLIP2 semantic gating, and
+              global/region/local reference attention.
+            </p>
+            <code>color_edit_stage1.pt</code>
+          </article>
+          <article class="timeline-step accent">
+            <span class="step-label">Stage II / v3.5</span>
+            <h3>Activate structure protection</h3>
+            <p>
+              Initialize from Stage I, add the content-only Intrinsic Preservation
+              Field, and use flow matching plus the Lab(a/b) chroma calibration loss.
+            </p>
+            <code>color_edit_final.pt</code>
+          </article>
+        </div>
+      </section>
+
+      <section class="section results" id="results">
+        <div class="section-heading compact">
+          <p class="section-kicker">Colorist-Bench-1K</p>
+          <h2>Strong color transfer with content-compatible reconstruction.</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>LPIPS down</th>
+                <th>DeltaE00 down</th>
+                <th>MSSWD down</th>
+                <th>PSNR up</th>
+                <th>DINO-T up</th>
+                <th>SSIM up</th>
+                <th>FG-CES up</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>ModFlows</th>
+                <td>0.2068</td>
+                <td>10.7253</td>
+                <td>3.2775</td>
+                <td>19.4800</td>
+                <td>0.9644</td>
+                <td>0.8611</td>
+                <td>72.07</td>
+              </tr>
+              <tr>
+                <th>AceTone</th>
+                <td>0.1534</td>
+                <td>12.2167</td>
+                <td>10.0575</td>
+                <td>18.4722</td>
+                <td>0.9792</td>
+                <td>0.8875</td>
+                <td>47.31</td>
+              </tr>
+              <tr>
+                <th>SA-LUT</th>
+                <td>0.2555</td>
+                <td>14.4987</td>
+                <td>10.1186</td>
+                <td>15.6330</td>
+                <td>0.9577</td>
+                <td>0.7770</td>
+                <td>36.30</td>
+              </tr>
+              <tr>
+                <th>FLUX.2 [klein] 9B</th>
+                <td>0.4639</td>
+                <td>18.5068</td>
+                <td>11.3541</td>
+                <td>15.0954</td>
+                <td>0.8063</td>
+                <td>0.6449</td>
+                <td>4.42</td>
+              </tr>
+              <tr>
+                <th>Qwen-Image-Edit SFT</th>
+                <td>0.3957</td>
+                <td>11.8850</td>
+                <td>6.3929</td>
+                <td>16.4456</td>
+                <td>0.9431</td>
+                <td>0.5409</td>
+                <td>48.19</td>
+              </tr>
+              <tr class="ours">
+                <th>SAGE-Color</th>
+                <td>0.1589</td>
+                <td>6.4729</td>
+                <td>6.4581</td>
+                <td>23.9952</td>
+                <td>0.9843</td>
+                <td>0.8718</td>
+                <td>95.33</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section gallery" aria-label="Visual comparisons">
+        <figure class="paper-figure wide">
+          <img src="assets/main_qual.jpg" alt="Qualitative comparison showing SAGE-Color and baseline outputs for reference color transfer." />
+          <figcaption>
+            Qualitative comparison against dedicated color-transfer and general
+            reference-editing baselines under identical content-reference pairs.
+          </figcaption>
+        </figure>
+        <figure class="paper-figure wide">
+          <img src="assets/ablation.jpg" alt="Ablation comparison for SAGE-Color components and training variants." />
+          <figcaption>
+            Ablations isolate semantic grounding, local chromatic evidence, staged
+            optimization, and residual protection.
+          </figcaption>
+        </figure>
+        <figure class="paper-figure wide">
+          <img src="assets/ipf_features.jpg" alt="Intrinsic Preservation Field achromatic structure features." />
+          <figcaption>
+            The preservation branch uses content-side achromatic cues such as edges,
+            local contrast, high-frequency detail, and texture-sensitive responses.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section release" id="release">
+        <div>
+          <p class="section-kicker">Release</p>
+          <h2>Code and the project page are packaged together.</h2>
+          <p>
+            The standalone folder includes training and inference scripts, pinned
+            environment files, and a static project page ready to serve from GitHub
+            Pages. The original paper source is intentionally kept out of this code
+            repository.
+          </p>
+        </div>
+        <div class="release-links" aria-label="Release links">
+          <a href="https://github.com/chenxib/sage-color">GitHub repository</a>
+          <a href="../README.md">Code README</a>
+          <a href="https://arxiv.org/">arXiv pending</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>SAGE-Color</span>
+      <span>Semantic Appearance Grounding for Reference-Based Color Transfer</span>
+    </footer>
+  </body>
+</html>

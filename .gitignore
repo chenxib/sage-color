@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+
+external/
+model/*
+!model/README.md
+datasets/*
+!datasets/README.md
+outputs/
+wandb/
+logs/
+
+*.zip
+*.tar
+*.tar.gz
