@@ -28,6 +28,7 @@ boundaries, identities, and fine details stable.
 
 ## Links
 
+- Project page: <https://chenxib.github.io/sage-color/>
 - Project page source: [`docs/index.html`](docs/index.html)
 - Code entrypoints: [`scripts/stage1_training`](scripts/stage1_training) and
   [`scripts/final_model`](scripts/final_model)

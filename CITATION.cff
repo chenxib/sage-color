@@ -1,11 +1,12 @@
 cff-version: 1.2.0
-message: "If you use this code or paper, please cite SAGE-Color."
+message: "If you use this code, model, or paper, please cite SAGE-Color."
 title: "SAGE-Color: Semantic Appearance Grounding for Reference-Based Color Transfer"
 authors:
-  - name: "Anonymous Author(s)"
+  - name: "SAGE-Color Authors"
 year: 2026
 type: software
 license: CC-BY-4.0
 repository-code: "https://github.com/chenxib/sage-color"
-url: "https://github.com/chenxib/sage-color"
-abstract: "SAGE-Color is an MMDiT-based flow-matching editor for semantic appearance grounding in reference-based color transfer."
+repository-artifact: "https://huggingface.co/chenxib/sage-color"
+url: "https://chenxib.github.io/sage-color/"
+abstract: "SAGE-Color is a reference-based color transfer model that uses semantic appearance grounding to transfer reference color appearance while preserving content structure."

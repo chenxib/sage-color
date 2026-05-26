@@ -41,7 +41,8 @@
         </p>
         <div class="actions">
           <a class="button primary" href="https://github.com/chenxib/sage-color">GitHub</a>
-          <a class="button" href="https://arxiv.org/">arXiv pending</a>
+          <a class="button" href="https://huggingface.co/chenxib/sage-color">Weights</a>
+          <a class="button" href="#code">How to use</a>
         </div>
       </section>
 
@@ -112,9 +113,8 @@
         <p>
           The repository contains single-checkpoint inference, the recommended
           two-stage training recipe, environment files, setup scripts, and this
-          project page. It does not
-          include the paper source, private datasets, model checkpoints, or
-          generated outputs.
+          project page. Released checkpoints are distributed through Hugging
+          Face so the GitHub repository stays lightweight and reproducible.
         </p>
         <pre><code>git clone https://github.com/chenxib/sage-color.git
 cd sage-color
@@ -122,8 +122,9 @@ conda env create -f environment.yml
 conda activate zhuise-color-edit
 bash scripts/bootstrap_external_diffusers.sh
 pip install -r requirements.txt
+bash scripts/download_weights.sh
+bash scripts/download_required_models.sh
 
-# Put the released checkpoint at checkpoints/sage-color-final.pt
 CUDA_VISIBLE_DEVICES=0 \
 CONTENT_IMAGE=path/to/content.png \
 REFERENCE_IMAGE=path/to/reference.png \
