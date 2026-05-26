@@ -3,75 +3,42 @@
 **Semantic Appearance Grounding for Reference-Based Color Transfer**
 
 SAGE-Color is a reference-based color transfer model built on Stable Diffusion
-3.5 Medium. Given a content image and an arbitrary reference image, it transfers
-the reference palette, tone, contrast, and region-level chromatic appearance
+3.5 Medium. Given a content image and a reference image, it transfers the
+reference image's palette, tone, contrast, and region-level color appearance
 while preserving the content image's geometry, identity, layout, and fine
 structure.
 
-This is the standalone release project. For users who only want to apply the
-released model, inference is a single checkpoint-based command: provide a
-content image, a reference image, and the released SAGE-Color checkpoint.
+The core idea is to treat the reference image as **chromatic evidence**, not as a
+spatial template. SAGE-Color is designed for cases where a user wants the color
+language of a reference image while keeping the original content layout,
+boundaries, identities, and fine details stable.
 
-For researchers who want to reproduce training, we recommend a two-stage
-training recipe:
+## Why SAGE-Color
 
-1. Train a reference color-grounding checkpoint with content-latent
-   conditioning, DINOv2 + CleanDIFT correspondence, SigLIP2 semantic gating, and
-   global/region/local reference attention.
-2. Continue from that checkpoint and train the final structure-preserving model
-   with the content-only Intrinsic Preservation Field and Lab(a/b) chroma
-   calibration loss.
+- **Reference appearance without reference layout leakage.** The content image
+  remains the spatial authority.
+- **Semantic color grounding.** Global, regional, and local reference evidence is
+  organized into a Semantic Color Gallery.
+- **Structure preservation.** The Intrinsic Preservation Field uses content-only
+  structure cues to attenuate unsafe reference residuals.
+- **Single-checkpoint inference.** Normal usage only needs one content image, one
+  reference image, and the released final checkpoint.
+- **Training recipe included.** The repository includes the recommended
+  two-stage recipe for researchers who want to reproduce or continue training.
 
 ## Links
 
 - Project page source: [`docs/index.html`](docs/index.html)
 - Code entrypoints: [`scripts/stage1_training`](scripts/stage1_training) and
   [`scripts/final_model`](scripts/final_model)
+- Model weights: <https://huggingface.co/chenxib/sage-color>
 - GitHub repository: <https://github.com/chenxib/sage-color>
 - arXiv: to be updated after the arXiv identifier is assigned
 
-## Repository Layout
-
-```text
-.
-├── README.md
-├── LICENSE
-├── CITATION.cff
-├── requirements.txt
-├── environment.yml
-├── docs/                         # static project page
-├── model/README.md               # expected external model-weight paths
-├── checkpoints/README.md         # released checkpoint placement
-├── datasets/README.md            # expected JSONL format and data notes
-└── scripts/
-    ├── bootstrap_external_diffusers.sh
-    ├── download_required_models.sh
-    ├── resolve_runtime.sh
-    ├── stage1_training/          # reference color-grounding training code
-    └── final_model/              # final training and inference code
-```
-
-Weights, datasets, checkpoints, generated outputs, and the local Diffusers
-checkout are intentionally ignored by Git.
-
-## Method Summary
-
-The paper frames reference-based color transfer as **semantic appearance
-grounding**: the reference image has chromatic authority, but not spatial
-authority. SAGE-Color separates the problem into three paths:
-
-- **Dense content path:** concatenates the noisy target latent and the content
-  latent, anchoring layout and geometry to the content image.
-- **Semantic Color Gallery:** represents reference appearance as global,
-  regional, and local chromatic evidence indexed by semantic correspondence.
-- **Intrinsic Preservation Field:** derives color-free content structure cues
-  from achromatic statistics, depth, and optional segmentation/panoptic priors
-  to protect structure-sensitive regions.
-
-## Fresh Clone Setup
+## Quick Start
 
 Python 3.11 and a CUDA-capable NVIDIA GPU are expected. The default mixed
-precision is `bf16`. Run the setup commands from the repository root.
+precision is `bf16`.
 
 ```bash
 git clone https://github.com/chenxib/sage-color.git
@@ -83,47 +50,92 @@ bash scripts/bootstrap_external_diffusers.sh
 pip install -r requirements.txt
 ```
 
-`environment.yml` only creates the Python environment. The editable Diffusers
-install is intentionally kept in `requirements.txt`, because
-`external/diffusers` does not exist until `scripts/bootstrap_external_diffusers.sh`
-has run.
+Download the released SAGE-Color checkpoints:
 
-## Required External Models
+```bash
+pip install -U huggingface_hub
+bash scripts/download_weights.sh
+```
 
-The default paths are documented in [`model/README.md`](model/README.md). After
-accepting the gated Stable Diffusion 3.5 Medium license on Hugging Face and
-logging in with `hf auth login`, run:
+Download the required external backbones and feature extractors:
 
 ```bash
 bash scripts/download_required_models.sh
 ```
 
-## Released Checkpoint
+Run inference:
 
-Put the released SAGE-Color checkpoint here:
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+CONTENT_IMAGE=path/to/content.png \
+REFERENCE_IMAGE=path/to/reference.png \
+OUTPUT_IMAGE=outputs/sage-color/sample.png \
+bash scripts/final_model/bash/infer.sh
+```
+
+The default checkpoint path is:
 
 ```text
 checkpoints/sage-color-final.pt
 ```
 
-No code change is needed if you use that filename. The inference wrapper uses it
-as the default `CHECKPOINT`.
-
-If you also provide the first training-stage checkpoint for continued training,
-put it here:
-
-```text
-checkpoints/sage-color-grounding.pt
-```
-
-The final-training wrapper uses that as the default
-`INIT_FROM_STAGE1_CHECKPOINT`. If your files live elsewhere, override the
-environment variables:
+Override it when needed:
 
 ```bash
-CHECKPOINT=/path/to/final.pt bash scripts/final_model/bash/infer.sh
-INIT_FROM_STAGE1_CHECKPOINT=/path/to/grounding.pt bash scripts/final_model/bash/train_single_gpu.sh
+CHECKPOINT=/path/to/sage-color-final.pt bash scripts/final_model/bash/infer.sh
 ```
+
+## Released Checkpoints
+
+The checkpoints are hosted on Hugging Face:
+
+<https://huggingface.co/chenxib/sage-color>
+
+| File | Purpose |
+| --- | --- |
+| `checkpoints/sage-color-final.pt` | Final checkpoint for normal inference. |
+| `checkpoints/sage-color-grounding.pt` | First-stage color-grounding checkpoint for continued final-stage training. |
+
+## Repository Layout
+
+```text
+.
+├── README.md
+├── LICENSE
+├── CITATION.cff
+├── requirements.txt
+├── environment.yml
+├── docs/                         # static project page
+├── model/README.md               # external model paths
+├── checkpoints/README.md         # checkpoint download and placement notes
+├── datasets/README.md            # JSONL data format
+└── scripts/
+    ├── bootstrap_external_diffusers.sh
+    ├── download_required_models.sh
+    ├── download_weights.sh
+    ├── resolve_runtime.sh
+    ├── stage1_training/          # reference color-grounding training code
+    └── final_model/              # final training and inference code
+```
+
+Weights, datasets, checkpoints, generated outputs, and the local Diffusers
+checkout are ignored by Git.
+
+## Method Summary
+
+SAGE-Color frames reference-based color transfer as **semantic appearance
+grounding**. The reference image should control color appearance, but it should
+not control geometry or layout.
+
+The model separates the problem into three paths:
+
+- **Dense Content Path:** concatenates the noisy target latent and the content
+  latent, anchoring layout and geometry to the content image.
+- **Semantic Color Gallery:** represents reference appearance as global,
+  regional, and local chromatic evidence indexed by semantic correspondence.
+- **Intrinsic Preservation Field:** derives color-free content structure cues
+  from achromatic statistics, depth, and optional segmentation/panoptic priors
+  to protect structure-sensitive regions.
 
 ## Data Format
 
@@ -173,7 +185,7 @@ CHECKPOINTING_STEPS=500 \
 bash scripts/stage1_training/bash/train_multi_gpu.sh
 ```
 
-This training pass saves:
+This pass saves:
 
 ```text
 outputs/stage1/checkpoint-<step>/color_edit_stage1.pt
@@ -222,35 +234,25 @@ The final checkpoint is saved as:
 outputs/final-model/checkpoint-<step>/color_edit_final.pt
 ```
 
-## Inference
-
-```bash
-CUDA_VISIBLE_DEVICES=0 \
-CHECKPOINT=checkpoints/sage-color-final.pt \
-CONTENT_IMAGE=path/to/content.png \
-REFERENCE_IMAGE=path/to/reference.png \
-OUTPUT_IMAGE=outputs/sage-color/sample.png \
-NUM_INFERENCE_STEPS=28 \
-bash scripts/final_model/bash/infer.sh
-```
+## Smoke Test
 
 For a minimal smoke run on limited memory, set `RESOLUTION=128` or
 `RESOLUTION=256`, `TRAIN_BATCH_SIZE=1`, `LORA_RANK=16`,
 `MAX_TRAIN_STEPS=1`, `NUM_WORKERS=0`, and `DISABLE_CHECKPOINT_VALIDATION=1`.
 
-## Project Page Assets
-
-The static project page in [`docs/`](docs) includes only original figure files
-copied from the provided paper package. The original paper source is
-intentionally not included in this code repository.
-
-## License And Data Notes
+## License And Dependencies
 
 This project is released under the
 [Creative Commons Attribution 4.0 International License](LICENSE).
 
 This code release depends on third-party model licenses, including Stable
 Diffusion 3.5 Medium and the feature extractors listed in
-[`model/README.md`](model/README.md). The Colorist-200K and Colorist-Bench-1K
-assets are described in the paper, but full redistribution may be restricted by
-the authors' data-use agreements.
+[`model/README.md`](model/README.md). Users are responsible for complying with
+the licenses of those dependencies.
+
+The Colorist-200K and Colorist-Bench-1K assets are described in the paper, but
+full redistribution may be restricted by the authors' data-use agreements.
+
+## Citation
+
+The arXiv identifier and final citation will be added after public release.

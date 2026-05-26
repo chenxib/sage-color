@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HF_BIN="${HF_BIN:-hf}"
+if [[ -z "${HF_BIN:-}" ]]; then
+  if command -v hf >/dev/null 2>&1; then
+    HF_BIN="hf"
+  elif command -v huggingface-cli >/dev/null 2>&1; then
+    HF_BIN="huggingface-cli"
+  else
+    HF_BIN="hf"
+  fi
+fi
 DOWNLOAD_SD35_FULL="${DOWNLOAD_SD35_FULL:-0}"
 DOWNLOAD_CLEANDIFT_VAE="${DOWNLOAD_CLEANDIFT_VAE:-0}"
 DOWNLOAD_DEPTH_ANYTHING="${DOWNLOAD_DEPTH_ANYTHING:-1}"
@@ -9,7 +17,7 @@ DOWNLOAD_SEGFORMER="${DOWNLOAD_SEGFORMER:-1}"
 DOWNLOAD_MASK2FORMER="${DOWNLOAD_MASK2FORMER:-1}"
 
 if ! command -v "${HF_BIN}" >/dev/null 2>&1; then
-  echo "Cannot find '${HF_BIN}'. Install huggingface-hub first: pip install huggingface-hub" >&2
+  echo "Cannot find '${HF_BIN}'. Install huggingface-hub first: pip install -U huggingface_hub" >&2
   exit 1
 fi
 

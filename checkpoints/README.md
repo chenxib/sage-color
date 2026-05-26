@@ -1,7 +1,16 @@
 # Checkpoint Placement
 
 This directory is reserved for released SAGE-Color checkpoints. Checkpoint files
-are ignored by Git.
+are ignored by Git and distributed through Hugging Face:
+
+<https://huggingface.co/chenxib/sage-color>
+
+From the repository root, download them with:
+
+```bash
+pip install -U huggingface_hub
+bash scripts/download_weights.sh
+```
 
 Use these default filenames if you want the wrapper scripts to work without
 extra path overrides:
