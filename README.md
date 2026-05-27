@@ -2,69 +2,97 @@
 
 **Semantic Appearance Grounding for Reference-Based Color Transfer**
 
-SAGE-Color is a reference-based color transfer model built on Stable Diffusion
-3.5 Medium. Given a content image and a reference image, it transfers the
-reference image's palette, tone, contrast, and region-level color appearance
-while preserving the content image's geometry, identity, layout, and fine
-structure.
+SAGE-Color is a reference-based color transfer model. Given a content image and
+a reference image, it transfers the reference image's palette, tone, contrast,
+and region-level appearance while preserving the content image's geometry,
+identity, layout, and fine structure.
 
-The core idea is to treat the reference image as **chromatic evidence**, not as a
-spatial template. SAGE-Color is designed for cases where a user wants the color
-language of a reference image while keeping the original content layout,
-boundaries, identities, and fine details stable.
+The key idea is to treat the reference image as **chromatic evidence**, not as a
+spatial template. The content image remains the authority for structure; the
+reference image supplies appearance.
+
+<p align="center">
+  <a href="https://chenxib.github.io/sage-color/">
+    <img alt="Project Page" src="https://img.shields.io/badge/Project-Page-b73422?style=for-the-badge">
+  </a>
+  <a href="https://huggingface.co/chenxib/sage-color">
+    <img alt="Model Weights" src="https://img.shields.io/badge/Model-Weights-1e63b6?style=for-the-badge">
+  </a>
+  <img alt="arXiv coming soon" src="https://img.shields.io/badge/arXiv-coming%20soon-62645f?style=for-the-badge">
+  <a href="LICENSE">
+    <img alt="License" src="https://img.shields.io/badge/License-CC%20BY%204.0-4c6b38?style=for-the-badge">
+  </a>
+</p>
+
+<p align="center">
+  <img src="docs/assets/task_schematic.png" alt="SAGE-Color task schematic" width="96%">
+</p>
+
+## At a Glance
+
+| Item | Details |
+| --- | --- |
+| Task | Reference-based color transfer |
+| Input | One content image and one reference image |
+| Output | Recolored content image with preserved structure |
+| Base model | Stable Diffusion 3.5 Medium |
+| Released weights | Final inference checkpoint and first-stage grounding checkpoint |
+| License | CC BY 4.0 for this code release |
 
 ## Why SAGE-Color
 
 - **Reference appearance without reference layout leakage.** The content image
-  remains the spatial authority.
-- **Semantic color grounding.** Global, regional, and local reference evidence is
-  organized into a Semantic Color Gallery.
+  controls geometry, identity, layout, and fine details.
+- **Semantic color grounding.** Reference colors are organized as global,
+  regional, and local chromatic evidence instead of copied by pixel position.
 - **Structure preservation.** The Intrinsic Preservation Field uses content-only
-  structure cues to attenuate unsafe reference residuals.
-- **Single-checkpoint inference.** Normal usage only needs one content image, one
-  reference image, and the released final checkpoint.
-- **Training recipe included.** The repository includes the recommended
-  two-stage recipe for researchers who want to reproduce or continue training.
-
-## Links
-
-- Project page: <https://chenxib.github.io/sage-color/>
-- Project page source: [`docs/index.html`](docs/index.html)
-- Code entrypoints: [`scripts/stage1_training`](scripts/stage1_training) and
-  [`scripts/final_model`](scripts/final_model)
-- Model weights: <https://huggingface.co/chenxib/sage-color>
-- GitHub repository: <https://github.com/chenxib/sage-color>
-- arXiv: to be updated after the arXiv identifier is assigned
+  structure cues to protect regions where color residuals could corrupt detail.
+- **Practical release.** The repository includes inference scripts, training
+  wrappers, environment files, setup utilities, and public checkpoints.
 
 ## Quick Start
 
-Python 3.11 and a CUDA-capable NVIDIA GPU are expected. The default mixed
-precision is `bf16`.
+Python 3.11, a CUDA-capable NVIDIA GPU, and `conda` are expected. The default
+mixed precision is `bf16`.
+
+### 1. Clone and Install
 
 ```bash
 git clone https://github.com/chenxib/sage-color.git
 cd sage-color
 
 conda env create -f environment.yml
-conda activate zhuise-color-edit
+conda activate sage-color
 bash scripts/bootstrap_external_diffusers.sh
 pip install -r requirements.txt
 ```
 
-Download the released SAGE-Color checkpoints:
+### 2. Download Checkpoints
 
 ```bash
 pip install -U huggingface_hub
 bash scripts/download_weights.sh
 ```
 
-Download the required external backbones and feature extractors:
+This downloads:
+
+| File | Purpose |
+| --- | --- |
+| `checkpoints/sage-color-final.pt` | Final checkpoint for normal inference. |
+| `checkpoints/sage-color-grounding.pt` | First-stage color-grounding checkpoint for continued final-stage training. |
+
+The checkpoints are hosted at
+[huggingface.co/chenxib/sage-color](https://huggingface.co/chenxib/sage-color).
+
+### 3. Download External Models
 
 ```bash
 bash scripts/download_required_models.sh
 ```
 
-Run inference:
+External model paths are documented in [`model/README.md`](model/README.md).
+
+### 4. Run Inference
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 \
@@ -74,28 +102,12 @@ OUTPUT_IMAGE=outputs/sage-color/sample.png \
 bash scripts/final_model/bash/infer.sh
 ```
 
-The default checkpoint path is:
-
-```text
-checkpoints/sage-color-final.pt
-```
-
-Override it when needed:
+The default checkpoint path is `checkpoints/sage-color-final.pt`. To use a
+different checkpoint:
 
 ```bash
 CHECKPOINT=/path/to/sage-color-final.pt bash scripts/final_model/bash/infer.sh
 ```
-
-## Released Checkpoints
-
-The checkpoints are hosted on Hugging Face:
-
-<https://huggingface.co/chenxib/sage-color>
-
-| File | Purpose |
-| --- | --- |
-| `checkpoints/sage-color-final.pt` | Final checkpoint for normal inference. |
-| `checkpoints/sage-color-grounding.pt` | First-stage color-grounding checkpoint for continued final-stage training. |
 
 ## Repository Layout
 
@@ -104,22 +116,22 @@ The checkpoints are hosted on Hugging Face:
 ├── README.md
 ├── LICENSE
 ├── CITATION.cff
-├── requirements.txt
 ├── environment.yml
-├── docs/                         # static project page
+├── requirements.txt
+├── docs/                         # GitHub Pages project page
 ├── model/README.md               # external model paths
-├── checkpoints/README.md         # checkpoint download and placement notes
+├── checkpoints/README.md         # checkpoint placement notes
 ├── datasets/README.md            # JSONL data format
 └── scripts/
     ├── bootstrap_external_diffusers.sh
     ├── download_required_models.sh
     ├── download_weights.sh
     ├── resolve_runtime.sh
-    ├── stage1_training/          # reference color-grounding training code
-    └── final_model/              # final training and inference code
+    ├── stage1_training/          # reference color-grounding training
+    └── final_model/              # final training and inference
 ```
 
-Weights, datasets, checkpoints, generated outputs, and the local Diffusers
+Weights, datasets, generated outputs, local checkpoints, and the local Diffusers
 checkout are ignored by Git.
 
 ## Method Summary
@@ -138,6 +150,9 @@ The model separates the problem into three paths:
   from achromatic statistics, depth, and optional segmentation/panoptic priors
   to protect structure-sensitive regions.
 
+The full architecture and qualitative results are shown on the
+[project page](https://chenxib.github.io/sage-color/).
+
 ## Data Format
 
 Training uses JSONL. Each row should contain a content image, a reference image,
@@ -155,7 +170,15 @@ Batch inference also accepts:
 
 Relative paths are resolved from the repository root.
 
-## Recommended Training: Color Grounding
+## Training
+
+SAGE-Color uses a recommended two-stage recipe:
+
+1. Train reference color grounding.
+2. Continue from the grounding checkpoint to train the final structure-preserving
+   model.
+
+### Stage 1: Color Grounding
 
 Single GPU:
 
@@ -186,15 +209,15 @@ CHECKPOINTING_STEPS=500 \
 bash scripts/stage1_training/bash/train_multi_gpu.sh
 ```
 
-This pass saves:
+Stage 1 saves:
 
 ```text
 outputs/stage1/checkpoint-<step>/color_edit_stage1.pt
 ```
 
-## Recommended Training: Final Model
+### Stage 2: Final Model
 
-Continue from the color-grounding checkpoint:
+Single GPU:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 \
@@ -239,9 +262,10 @@ outputs/final-model/checkpoint-<step>/color_edit_final.pt
 
 For a minimal smoke run on limited memory, set `RESOLUTION=128` or
 `RESOLUTION=256`, `TRAIN_BATCH_SIZE=1`, `LORA_RANK=16`,
-`MAX_TRAIN_STEPS=1`, `NUM_WORKERS=0`, and `DISABLE_CHECKPOINT_VALIDATION=1`.
+`MAX_TRAIN_STEPS=1`, `NUM_WORKERS=0`, and
+`DISABLE_CHECKPOINT_VALIDATION=1`.
 
-## License And Dependencies
+## License and Dependencies
 
 This project is released under the
 [Creative Commons Attribution 4.0 International License](LICENSE).

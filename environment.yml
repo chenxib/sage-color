@@ -1,4 +1,4 @@
-name: zhuise-color-edit
+name: sage-color
 channels:
   - conda-forge
 dependencies:
