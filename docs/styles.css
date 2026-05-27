@@ -175,6 +175,18 @@ h2 {
   color: #ffffff;
 }
 
+.button.disabled {
+  border-color: rgba(183, 52, 34, 0.32);
+  color: var(--accent);
+  background: rgba(183, 52, 34, 0.08);
+  box-shadow: none;
+  cursor: default;
+}
+
+.button.disabled:hover {
+  transform: none;
+}
+
 figure {
   margin: 0;
   overflow: hidden;
@@ -220,6 +232,19 @@ figcaption {
 .signal-strip div {
   min-height: 92px;
   padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.signal-strip div::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  bottom: -28px;
+  width: 78px;
+  height: 78px;
+  border: 1px solid rgba(183, 52, 34, 0.18);
+  border-radius: 50%;
 }
 
 .signal-strip span,
@@ -335,6 +360,13 @@ figcaption {
   box-shadow: var(--shadow);
 }
 
+.release-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+}
+
 pre {
   margin: 20px 0 0;
   overflow-x: auto;
@@ -436,6 +468,14 @@ footer {
 
   footer span + span {
     margin-top: 8px;
+  }
+
+  .release-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .release-panel .button {
+    width: 100%;
   }
 }
 

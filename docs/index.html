@@ -43,7 +43,7 @@
           <div class="actions">
             <a class="button primary" href="https://github.com/chenxib/sage-color">GitHub</a>
             <a class="button" href="https://huggingface.co/chenxib/sage-color">Weights</a>
-            <a class="button" href="#code">Run inference</a>
+            <span class="button disabled" aria-disabled="true">arXiv coming soon</span>
           </div>
         </div>
 
@@ -61,20 +61,20 @@
 
       <section class="signal-strip" aria-label="Release highlights">
         <div>
-          <span>Inputs</span>
-          <strong>content + reference</strong>
+          <span>Code</span>
+          <strong>inference + training</strong>
         </div>
         <div>
-          <span>Output</span>
-          <strong>structure-preserving recolor</strong>
+          <span>Weights</span>
+          <strong>final + grounding</strong>
         </div>
         <div>
-          <span>Release</span>
-          <strong>code + checkpoints</strong>
+          <span>Paper</span>
+          <strong>arXiv coming soon</strong>
         </div>
         <div>
-          <span>License</span>
-          <strong>CC BY 4.0</strong>
+          <span>Task</span>
+          <strong>content-guided color transfer</strong>
         </div>
       </section>
 
@@ -176,13 +176,18 @@
       </section>
 
       <section class="section code" id="code">
-        <h2>Code Release</h2>
-        <p>
-          The repository contains single-checkpoint inference, the recommended
-          two-stage training recipe, environment files, setup scripts, and this
-          project page. Released checkpoints are distributed through Hugging
-          Face so the GitHub repository stays lightweight and reproducible.
-        </p>
+        <div class="release-panel">
+          <div>
+            <p class="eyebrow">Release</p>
+            <h2>Run SAGE-Color</h2>
+            <p>
+              The GitHub repository contains inference, training, environment
+              setup, and reproducibility scripts. The released checkpoints are
+              hosted on Hugging Face so the code repository stays lightweight.
+            </p>
+          </div>
+          <a class="button primary" href="https://github.com/chenxib/sage-color">Open repository</a>
+        </div>
         <pre><code>git clone https://github.com/chenxib/sage-color.git
 cd sage-color
 conda env create -f environment.yml
