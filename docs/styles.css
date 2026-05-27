@@ -221,17 +221,17 @@ h3 {
 
 .mosaic-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-auto-flow: dense;
-  grid-auto-rows: clamp(126px, 12.8vw, 174px);
+  grid-auto-rows: clamp(72px, 5.8vw, 92px);
   gap: 12px;
   align-items: stretch;
 }
 
 .mosaic-tile {
   position: relative;
-  grid-column: span 2;
-  grid-row: span 1;
+  grid-column: span 4;
+  grid-row: span 3;
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(21, 32, 29, 0.12);
@@ -242,14 +242,14 @@ h3 {
   transform: none;
 }
 
-.mosaic-tile.tile-wide {
-  grid-column: span 3;
-  grid-row: span 2;
+.mosaic-tile.tile-half {
+  grid-column: span 6;
 }
 
+.mosaic-tile.tile-third,
+.mosaic-tile.tile-wide,
 .mosaic-tile.tile-tall {
-  grid-column: span 2;
-  grid-row: span 2;
+  grid-column: span 4;
 }
 
 .tile-stack {
@@ -293,8 +293,7 @@ h3 {
   inset: 0;
   width: 100%;
   height: 100%;
-  padding: 5px;
-  object-fit: contain;
+  object-fit: cover;
   transform: scale(1);
   will-change: clip-path, transform;
 }
@@ -332,12 +331,13 @@ h3 {
   animation: reference-pop var(--teaser-cycle) cubic-bezier(0.24, 0.78, 0.22, 1) var(--delay) infinite;
 }
 
-.tile-tall .tile-reference {
-  width: clamp(86px, 42%, 148px);
+.tile-half .tile-reference {
+  width: clamp(118px, 26%, 176px);
 }
 
+.tile-third .tile-reference,
 .tile-wide .tile-reference {
-  width: clamp(118px, 30%, 170px);
+  width: clamp(102px, 34%, 158px);
 }
 
 .mosaic-tile figcaption,
@@ -603,28 +603,28 @@ h3 {
 
 .triplet-board {
   display: grid;
-  grid-template-columns: minmax(120px, 0.27fr) minmax(120px, 0.27fr) minmax(0, 0.66fr);
+  grid-template-columns: minmax(150px, 0.24fr) minmax(150px, 0.24fr) minmax(0, 0.72fr);
   gap: 14px;
   align-items: start;
 }
 
 .input-card,
 .output-card {
+  display: flex;
+  flex-direction: column;
   margin: 0;
 }
 
 .input-card img {
   height: auto;
-  max-height: 360px;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
 }
 
 .output-card img {
-  height: auto;
-  max-height: 660px;
-}
-
-.landscape-output .output-card img {
-  max-height: 500px;
+  height: 560px;
+  min-height: 0;
+  object-fit: contain;
 }
 
 .gallery-slide h3 {
@@ -856,12 +856,16 @@ footer {
 @media (max-width: 980px) {
   .mosaic-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-auto-rows: clamp(116px, 19vw, 160px);
+    grid-auto-rows: clamp(94px, 12vw, 132px);
   }
 
+  .mosaic-tile,
+  .mosaic-tile.tile-half,
+  .mosaic-tile.tile-third,
   .mosaic-tile.tile-wide,
   .mosaic-tile.tile-tall {
     grid-column: span 2;
+    grid-row: span 2;
   }
 
   .contribution-grid,
@@ -885,9 +889,9 @@ footer {
   }
 
   .input-card img,
-  .output-card img,
-  .landscape-output .output-card img {
-    max-height: none;
+  .output-card img {
+    height: auto;
+    aspect-ratio: 3 / 4;
   }
 }
 
@@ -1024,17 +1028,16 @@ footer {
 
   .mosaic-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 154px;
+    grid-auto-rows: 138px;
     gap: 10px;
   }
 
   .mosaic-tile,
+  .mosaic-tile.tile-half,
+  .mosaic-tile.tile-third,
   .mosaic-tile.tile-wide,
   .mosaic-tile.tile-tall {
     grid-column: span 2;
-  }
-
-  .mosaic-tile.tile-tall {
     grid-row: span 2;
   }
 
@@ -1055,10 +1058,8 @@ footer {
   }
 
   .input-card img,
-  .output-card img,
-  .landscape-output .output-card img {
+  .output-card img {
     height: auto;
-    max-height: none;
-    aspect-ratio: auto;
+    aspect-ratio: 3 / 4;
   }
 }

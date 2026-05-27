@@ -25,11 +25,11 @@ reference image supplies appearance.
 </p>
 
 <p align="center">
-  <img src="docs/assets/showcase/readme_spotlight.jpg" alt="SAGE-Color animated showcase snapshot with lower-left reference cards and alternating results." width="96%">
+  <img src="docs/assets/showcase/readme_spotlight.jpg" alt="SAGE-Color ordered animated showcase with lower-left reference cards and alternating results." width="96%">
 </p>
 
 <p align="center">
-  <em>The project page uses an animated showcase: reference images jump into the lower-left corner while content images alternate with SAGE-Color results.</em>
+  <em>The project page uses an ordered animated showcase and a sliding gallery of scene-style transfer cases.</em>
 </p>
 
 ## At a Glance
