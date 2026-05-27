@@ -25,7 +25,7 @@ reference image supplies appearance.
 </p>
 
 <p align="center">
-  <img src="docs/assets/showcase/sage_color_readme_showcase.jpg" alt="SAGE-Color examples showing content images, reference images, and generated recolored results." width="96%">
+  <img src="docs/assets/showcase/readme_spotlight.jpg" alt="SAGE-Color examples with large generated results and smaller content/reference evidence images." width="96%">
 </p>
 
 <p align="center">

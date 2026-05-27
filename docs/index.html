@@ -13,7 +13,7 @@
       property="og:description"
       content="Semantic Appearance Grounding for Reference-Based Color Transfer."
     />
-    <meta property="og:image" content="assets/showcase/sage_color_teaser.jpg" />
+    <meta property="og:image" content="assets/showcase/hero_spotlight.jpg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -46,14 +46,59 @@
         </div>
       </section>
 
-      <section class="teaser" aria-label="SAGE-Color visual examples">
-        <figure class="teaser-frame">
-          <img
-            src="assets/showcase/sage_color_teaser.jpg"
-            alt="SAGE-Color examples showing content images, reference images, and generated recolored results across portraits, landscapes, night scenes, and street photography."
-            loading="eager"
-          />
-        </figure>
+      <section class="teaser showcase-stage" aria-label="SAGE-Color visual examples">
+        <div class="feature-grid">
+          <article class="feature-card feature-card-large">
+            <span class="result-label">Result</span>
+            <figure class="result-photo">
+              <img src="assets/showcase/102_result.jpg" alt="SAGE-Color portrait result with low-key reference tone." loading="eager" />
+            </figure>
+            <div class="evidence-pair">
+              <figure class="evidence-card">
+                <span>Content</span>
+                <img src="assets/showcase/102_content.jpg" alt="Portrait content image before transfer." loading="eager" />
+              </figure>
+              <figure class="evidence-card">
+                <span>Reference</span>
+                <img src="assets/showcase/102_reference.jpg" alt="Low-key trumpet reference image." loading="eager" />
+              </figure>
+            </div>
+          </article>
+          <div class="feature-stack">
+            <article class="feature-card feature-card-compact">
+              <span class="result-label">Result</span>
+              <figure class="result-photo">
+                <img src="assets/showcase/004_result.jpg" alt="SAGE-Color recolored mountain scene result." loading="eager" />
+              </figure>
+              <div class="evidence-pair compact">
+                <figure class="evidence-card">
+                  <span>Content</span>
+                  <img src="assets/showcase/004_content.jpg" alt="Content mountain scene before transfer." loading="eager" />
+                </figure>
+                <figure class="evidence-card">
+                  <span>Reference</span>
+                  <img src="assets/showcase/004_reference.jpg" alt="Warm barren-land reference image." loading="eager" />
+                </figure>
+              </div>
+            </article>
+            <article class="feature-card feature-card-compact">
+              <span class="result-label">Result</span>
+              <figure class="result-photo">
+                <img src="assets/showcase/253_result.jpg" alt="SAGE-Color flower portrait result with warm sunset reference tone." loading="eager" />
+              </figure>
+              <div class="evidence-pair compact">
+                <figure class="evidence-card">
+                  <span>Content</span>
+                  <img src="assets/showcase/253_content.jpg" alt="Flower portrait content image before transfer." loading="eager" />
+                </figure>
+                <figure class="evidence-card">
+                  <span>Reference</span>
+                  <img src="assets/showcase/253_reference.jpg" alt="Warm palm sunset reference image." loading="eager" />
+                </figure>
+              </div>
+            </article>
+          </div>
+        </div>
         <p class="teaser-caption">
           Reference images provide appearance. Content images keep structure.
           The result follows the reference color language without inheriting the
@@ -128,43 +173,123 @@
         >
           <div class="gallery-viewport" data-gallery-viewport>
             <div class="gallery-track" data-gallery-track>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 8">
-                <img src="assets/showcase/case_004.jpg" alt="Mountain scene color transfer example." loading="lazy" />
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 6">
+                <div class="gallery-visual">
+                  <figure class="result-view">
+                    <span>Result</span>
+                    <img src="assets/showcase/004_result.jpg" alt="Mountain scene color transfer result." loading="lazy" />
+                  </figure>
+                  <div class="source-column">
+                    <figure class="source-card">
+                      <span>Content</span>
+                      <img src="assets/showcase/004_content.jpg" alt="Mountain content image." loading="lazy" />
+                    </figure>
+                    <figure class="source-card">
+                      <span>Reference</span>
+                      <img src="assets/showcase/004_reference.jpg" alt="Warm barren-land reference image." loading="lazy" />
+                    </figure>
+                  </div>
+                </div>
                 <h3>Landscape palette transfer</h3>
                 <p>A barren-land reference warms the rocky content scene while preserving the figure and terrain structure.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 8">
-                <img src="assets/showcase/case_102.jpg" alt="Portrait color transfer example with studio tone reference." loading="lazy" />
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 6">
+                <div class="gallery-visual">
+                  <figure class="result-view">
+                    <span>Result</span>
+                    <img src="assets/showcase/102_result.jpg" alt="Portrait color transfer result with studio tone reference." loading="lazy" />
+                  </figure>
+                  <div class="source-column">
+                    <figure class="source-card">
+                      <span>Content</span>
+                      <img src="assets/showcase/102_content.jpg" alt="Portrait content image." loading="lazy" />
+                    </figure>
+                    <figure class="source-card">
+                      <span>Reference</span>
+                      <img src="assets/showcase/102_reference.jpg" alt="Low-key trumpet reference image." loading="lazy" />
+                    </figure>
+                  </div>
+                </div>
                 <h3>Portrait tone transfer</h3>
                 <p>A low-key studio reference changes the lighting mood without changing the face, pose, or veil geometry.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 8">
-                <img src="assets/showcase/case_243.jpg" alt="Blue night umbrella reference transferred to a garden portrait." loading="lazy" />
-                <h3>Night atmosphere transfer</h3>
-                <p>A dark blue reference shifts the scene into a cooler night-like appearance while the content layout remains stable.</p>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 6">
+                <div class="gallery-visual">
+                  <figure class="result-view">
+                    <span>Result</span>
+                    <img src="assets/showcase/253_result.jpg" alt="Flower portrait color transfer result." loading="lazy" />
+                  </figure>
+                  <div class="source-column">
+                    <figure class="source-card">
+                      <span>Content</span>
+                      <img src="assets/showcase/253_content.jpg" alt="Flower portrait content image." loading="lazy" />
+                    </figure>
+                    <figure class="source-card">
+                      <span>Reference</span>
+                      <img src="assets/showcase/253_reference.jpg" alt="Warm palm sunset reference image." loading="lazy" />
+                    </figure>
+                  </div>
+                </div>
+                <h3>Floral warmth transfer</h3>
+                <p>The reference sunset palette shifts the portrait toward a richer warm tone while preserving the subject and blossoms.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 8">
-                <img src="assets/showcase/case_409.jpg" alt="Warm field reference transferred to a portrait scene." loading="lazy" />
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 6">
+                <div class="gallery-visual">
+                  <figure class="result-view">
+                    <span>Result</span>
+                    <img src="assets/showcase/409_result.jpg" alt="Warm field reference transferred to a portrait scene." loading="lazy" />
+                  </figure>
+                  <div class="source-column">
+                    <figure class="source-card">
+                      <span>Content</span>
+                      <img src="assets/showcase/409_content.jpg" alt="Portrait content image with hat." loading="lazy" />
+                    </figure>
+                    <figure class="source-card">
+                      <span>Reference</span>
+                      <img src="assets/showcase/409_reference.jpg" alt="Warm outdoor field reference image." loading="lazy" />
+                    </figure>
+                  </div>
+                </div>
                 <h3>Warm outdoor transfer</h3>
                 <p>The result absorbs the warm field palette while keeping the content subject, hat, and foreground strands intact.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 8">
-                <img src="assets/showcase/case_461.jpg" alt="Sunset grass reference transferred to a portrait scene." loading="lazy" />
-                <h3>Sunset color grounding</h3>
-                <p>Reference warmth and violet shadows are mapped into compatible regions without flattening the content details.</p>
-              </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 8">
-                <img src="assets/showcase/case_533.jpg" alt="Green umbrella reference transferred to a street portrait." loading="lazy" />
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 6">
+                <div class="gallery-visual">
+                  <figure class="result-view">
+                    <span>Result</span>
+                    <img src="assets/showcase/533_result.jpg" alt="Green umbrella reference transferred to a street portrait." loading="lazy" />
+                  </figure>
+                  <div class="source-column">
+                    <figure class="source-card">
+                      <span>Content</span>
+                      <img src="assets/showcase/533_content.jpg" alt="Street portrait content image." loading="lazy" />
+                    </figure>
+                    <figure class="source-card">
+                      <span>Reference</span>
+                      <img src="assets/showcase/533_reference.jpg" alt="Green umbrella reference image." loading="lazy" />
+                    </figure>
+                  </div>
+                </div>
                 <h3>Transparent-object consistency</h3>
                 <p>The umbrella and surrounding foliage receive reference-compatible tones while object boundaries remain readable.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="7 of 8">
-                <img src="assets/showcase/case_543.jpg" alt="Blue beach reference transferred to a coastal portrait." loading="lazy" />
-                <h3>Cool coastal transfer</h3>
-                <p>The reference's blue cast is applied to the content scene without changing the person or shoreline structure.</p>
-              </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="8 of 8">
-                <img src="assets/showcase/case_830.jpg" alt="Evening street reference transferred to a crosswalk portrait." loading="lazy" />
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 6">
+                <div class="gallery-visual">
+                  <figure class="result-view">
+                    <span>Result</span>
+                    <img src="assets/showcase/830_result.jpg" alt="Evening street reference transferred to a crosswalk portrait." loading="lazy" />
+                  </figure>
+                  <div class="source-column">
+                    <figure class="source-card">
+                      <span>Content</span>
+                      <img src="assets/showcase/830_content.jpg" alt="Crosswalk portrait content image." loading="lazy" />
+                    </figure>
+                    <figure class="source-card">
+                      <span>Reference</span>
+                      <img src="assets/showcase/830_reference.jpg" alt="Evening street reference image." loading="lazy" />
+                    </figure>
+                  </div>
+                </div>
                 <h3>Street-scene recoloring</h3>
                 <p>The model follows the evening reference tone while preserving the crosswalk, sign, and subject geometry.</p>
               </article>
