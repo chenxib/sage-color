@@ -13,13 +13,14 @@
       property="og:description"
       content="Semantic Appearance Grounding for Reference-Based Color Transfer."
     />
-    <meta property="og:image" content="assets/overview.png" />
+    <meta property="og:image" content="assets/task_schematic.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="#top">SAGE-Color</a>
       <nav>
+        <a href="#task">Task</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
         <a href="#code">Code</a>
@@ -28,25 +29,89 @@
 
     <main id="top">
       <section class="hero">
-        <p class="venue">Reference-Based Color Transfer</p>
-        <h1>SAGE-Color</h1>
-        <p class="subtitle">
-          Semantic Appearance Grounding for Reference-Based Color Transfer
-        </p>
-        <p class="abstract">
-          SAGE-Color transfers the color appearance of a reference image while
-          preserving the content image's geometry, identity, layout, and fine
-          structure. The model treats the reference as chromatic evidence, not as
-          a spatial template.
-        </p>
-        <div class="actions">
-          <a class="button primary" href="https://github.com/chenxib/sage-color">GitHub</a>
-          <a class="button" href="https://huggingface.co/chenxib/sage-color">Weights</a>
-          <a class="button" href="#code">How to use</a>
+        <div class="hero-copy">
+          <p class="venue">Reference-Based Color Transfer</p>
+          <h1>SAGE-Color</h1>
+          <p class="subtitle">
+            Semantic Appearance Grounding for Reference-Based Color Transfer
+          </p>
+          <p class="abstract">
+            SAGE-Color transfers palette, tone, contrast, and region-level
+            appearance from a reference image while preserving the content
+            image's geometry, identity, and fine structure.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/chenxib/sage-color">GitHub</a>
+            <a class="button" href="https://huggingface.co/chenxib/sage-color">Weights</a>
+            <a class="button" href="#code">Run inference</a>
+          </div>
+        </div>
+
+        <figure class="hero-figure">
+          <img
+            src="assets/task_schematic.png"
+            alt="SAGE-Color task schematic showing content image, reference image, transferred result, semantic color grounding, and intrinsic preservation field."
+          />
+          <figcaption>
+            Reference colors are grounded by semantics while content geometry
+            stays fixed.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="signal-strip" aria-label="Release highlights">
+        <div>
+          <span>Inputs</span>
+          <strong>content + reference</strong>
+        </div>
+        <div>
+          <span>Output</span>
+          <strong>structure-preserving recolor</strong>
+        </div>
+        <div>
+          <span>Release</span>
+          <strong>code + checkpoints</strong>
+        </div>
+        <div>
+          <span>License</span>
+          <strong>CC BY 4.0</strong>
+        </div>
+      </section>
+
+      <section class="section split" id="task">
+        <div>
+          <p class="eyebrow">Problem</p>
+          <h2>Color transfer without layout transfer</h2>
+          <p>
+            Reference images contain useful palette, tone, contrast, and
+            region-level appearance, but they also contain their own geometry.
+            SAGE-Color separates these two roles: the content image keeps
+            spatial authority, while the reference image supplies appearance
+            evidence.
+          </p>
+        </div>
+        <div class="notes">
+          <div>
+            <strong>Semantic color grounding</strong>
+            <span>Reference colors are matched to content regions instead of copied by position.</span>
+          </div>
+          <div>
+            <strong>Intrinsic preservation field</strong>
+            <span>Content-only structure cues protect regions where color residuals could corrupt identity or detail.</span>
+          </div>
         </div>
       </section>
 
       <section class="figure-section" id="method">
+        <div class="section-head">
+          <p class="eyebrow">Architecture</p>
+          <h2>Semantic appearance grounding</h2>
+          <p>
+            The final model combines a dense content path, a reference
+            appearance lane, and a structure-preservation lane inside an MMDiT
+            flow editor.
+          </p>
+        </div>
         <figure>
           <img
             src="assets/overview.png"
@@ -61,6 +126,7 @@
 
       <section class="section split">
         <div>
+          <p class="eyebrow">Model</p>
           <h2>Method</h2>
           <p>
             The content image provides spatial authority through latent
@@ -84,6 +150,7 @@
 
       <section class="section" id="results">
         <div class="section-head">
+          <p class="eyebrow">Evaluation</p>
           <h2>Results</h2>
           <p>
             On Colorist-Bench-1K, SAGE-Color improves reference color fidelity
@@ -135,6 +202,7 @@ bash scripts/final_model/bash/infer.sh</code></pre>
 
     <footer>
       <span>Licensed under CC BY 4.0.</span>
+      <span>Code and checkpoints are public.</span>
     </footer>
   </body>
 </html>

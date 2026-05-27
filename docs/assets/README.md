@@ -6,6 +6,7 @@ package:
 ```text
 figures/overview.png
 figures/main_qual_corrected.pdf
+figures/fig1.pdf
 ```
 
-No generated preview images or extra non-paper images are included here.
+PDF figures are rendered to PNG for browser-stable display on the project page.
