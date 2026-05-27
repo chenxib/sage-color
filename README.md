@@ -25,11 +25,11 @@ reference image supplies appearance.
 </p>
 
 <p align="center">
-  <img src="docs/assets/showcase/readme_spotlight.jpg" alt="SAGE-Color examples with large generated results and smaller content/reference evidence images." width="96%">
+  <img src="docs/assets/showcase/readme_spotlight.jpg" alt="SAGE-Color animated showcase snapshot with alternating content and result examples." width="96%">
 </p>
 
 <p align="center">
-  <em>Content image -> reference image -> SAGE-Color result. The reference controls appearance; the content image keeps structure.</em>
+  <em>The project page uses an animated showcase: content images alternate with SAGE-Color results, while references provide the appearance evidence.</em>
 </p>
 
 ## At a Glance

@@ -13,13 +13,14 @@
       property="og:description"
       content="Semantic Appearance Grounding for Reference-Based Color Transfer."
     />
-    <meta property="og:image" content="assets/showcase/hero_spotlight.jpg" />
-    <link rel="stylesheet" href="styles.css?v=showcase-v2" />
+    <meta property="og:image" content="assets/showcase/readme_spotlight.jpg" />
+    <link rel="stylesheet" href="styles.css?v=ictone-motion" />
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="#top">SAGE-Color</a>
       <nav aria-label="Project sections">
+        <a href="#showcase">Showcase</a>
         <a href="#gallery">Gallery</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
@@ -36,8 +37,8 @@
         </p>
         <p class="hero-text">
           SAGE-Color transfers palette, tone, contrast, and region-level
-          appearance from a reference image while preserving the content
-          image's geometry, identity, layout, and fine structure.
+          appearance from a reference image while preserving the content image's
+          geometry, identity, layout, and fine structure.
         </p>
         <div class="actions">
           <a class="button primary" href="https://github.com/chenxib/sage-color">GitHub</a>
@@ -46,133 +47,204 @@
         </div>
       </section>
 
-      <section class="teaser showcase-stage" aria-label="SAGE-Color visual examples">
-        <article class="lead-comparison">
-          <div class="lead-sources" aria-label="Lead example inputs">
-            <figure class="source-card">
-              <span>Content</span>
-              <div class="image-shell source-shell">
-                <img src="assets/showcase/243_content.jpg" alt="Traditional portrait content image before transfer." loading="eager" />
-              </div>
-            </figure>
-            <div class="transfer-arrow" aria-hidden="true">&#8594;</div>
-            <figure class="source-card">
-              <span>Reference</span>
-              <div class="image-shell source-shell portrait-shell">
-                <img src="assets/showcase/243_reference.jpg" alt="Cool blue umbrella reference image." loading="eager" />
-              </div>
-            </figure>
-          </div>
-          <figure class="lead-result">
-            <span>SAGE-Color result</span>
-            <div class="image-shell result-shell">
-              <img src="assets/showcase/243_result.jpg" alt="SAGE-Color result with cool blue reference tone." loading="eager" />
-            </div>
-          </figure>
-        </article>
-
-        <div class="mini-showcase" aria-label="Additional SAGE-Color examples">
-          <article class="mini-case">
-            <figure class="mini-result">
-              <span>Result</span>
-              <div class="image-shell">
-                <img src="assets/showcase/409_result.jpg" alt="Warm field reference transferred to a portrait scene." loading="lazy" />
-              </div>
-            </figure>
-            <div class="mini-sources">
-              <figure>
-                <span>Content</span>
-                <img src="assets/showcase/409_content.jpg" alt="Portrait content image with hat." loading="lazy" />
-              </figure>
-              <figure>
-                <span>Reference</span>
-                <img src="assets/showcase/409_reference.jpg" alt="Warm outdoor field reference image." loading="lazy" />
-              </figure>
-            </div>
-          </article>
-          <article class="mini-case">
-            <figure class="mini-result">
-              <span>Result</span>
-              <div class="image-shell">
-                <img src="assets/showcase/533_result.jpg" alt="Green umbrella reference transferred to a street portrait." loading="lazy" />
-              </div>
-            </figure>
-            <div class="mini-sources">
-              <figure>
-                <span>Content</span>
-                <img src="assets/showcase/533_content.jpg" alt="Street portrait content image." loading="lazy" />
-              </figure>
-              <figure>
-                <span>Reference</span>
-                <img src="assets/showcase/533_reference.jpg" alt="Green umbrella reference image." loading="lazy" />
-              </figure>
-            </div>
-          </article>
-          <article class="mini-case">
-            <figure class="mini-result">
-              <span>Result</span>
-              <div class="image-shell">
-                <img src="assets/showcase/830_result.jpg" alt="Evening street reference transferred to a crosswalk portrait." loading="lazy" />
-              </div>
-            </figure>
-            <div class="mini-sources">
-              <figure>
-                <span>Content</span>
-                <img src="assets/showcase/830_content.jpg" alt="Crosswalk portrait content image." loading="lazy" />
-              </figure>
-              <figure>
-                <span>Reference</span>
-                <img src="assets/showcase/830_reference.jpg" alt="Evening street reference image." loading="lazy" />
-              </figure>
-            </div>
-          </article>
-        </div>
-        <p class="teaser-caption">
-          Reference images provide appearance. Content images keep structure.
-          The result follows the reference color language without inheriting the
-          reference layout.
-        </p>
-      </section>
-
-      <section class="signal-strip" aria-label="Release highlights">
-        <div>
-          <span>Inputs</span>
-          <strong>content image + reference image</strong>
-        </div>
-        <div>
-          <span>Output</span>
-          <strong>recolored image with fixed structure</strong>
-        </div>
-        <div>
-          <span>Weights</span>
-          <strong>final + grounding checkpoints</strong>
-        </div>
-        <div>
-          <span>Release</span>
-          <strong>training and inference scripts</strong>
-        </div>
-      </section>
-
-      <section class="section split" id="gallery">
-        <div>
-          <p class="eyebrow">Visual Gallery</p>
-          <h2>Reference appearance, content structure</h2>
+      <section class="motion-teaser" id="showcase" aria-label="Animated SAGE-Color teaser">
+        <div class="motion-copy">
+          <p class="eyebrow">Visual Showcase</p>
+          <h2>Content structure stays fixed. Reference appearance moves.</h2>
           <p>
-            The gallery highlights the central behavior of SAGE-Color: the
-            output inherits chromatic evidence from the reference image while
-            retaining the pose, object boundaries, layout, and fine detail of
-            the content image.
+            Each example alternates from the original content image to the
+            SAGE-Color result, while the reference strip shows the appearance
+            evidence used by the model.
           </p>
         </div>
-        <div class="notes">
-          <div>
-            <strong>No layout leakage</strong>
-            <span>Reference color is transferred without copying reference geometry.</span>
-          </div>
-          <div>
-            <strong>Semantic appearance grounding</strong>
-            <span>Global, regional, and local color cues are assigned to compatible content regions.</span>
-          </div>
+
+        <div class="mosaic-grid" data-motion-grid>
+          <figure class="mosaic-tile tile-wide" style="--delay: -3900ms; --cycle: 7200ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/830_content.jpg" alt="Street content image before color transfer." loading="eager" />
+              <img class="tile-layer tile-result" src="assets/showcase/830_result.jpg" alt="Street SAGE-Color result." loading="eager" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+
+          <figure class="mosaic-tile tile-tall" style="--delay: -1100ms; --cycle: 7600ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/298_content.jpg" alt="Lake portrait content image before color transfer." loading="eager" />
+              <img class="tile-layer tile-result" src="assets/showcase/298_result.jpg" alt="Lake portrait SAGE-Color result." loading="eager" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+
+          <figure class="mosaic-tile" style="--delay: -4700ms; --cycle: 6900ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/409_content.jpg" alt="Portrait content image before color transfer." loading="eager" />
+              <img class="tile-layer tile-result" src="assets/showcase/409_result.jpg" alt="Portrait SAGE-Color result." loading="eager" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+
+          <figure class="mosaic-tile tile-tall" style="--delay: -2200ms; --cycle: 7800ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/610_content.jpg" alt="Garden content image before color transfer." loading="lazy" />
+              <img class="tile-layer tile-result" src="assets/showcase/610_result.jpg" alt="Garden SAGE-Color result." loading="lazy" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+
+          <figure class="mosaic-tile tile-wide" style="--delay: -5200ms; --cycle: 7400ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/243_content.jpg" alt="Traditional portrait content image before color transfer." loading="lazy" />
+              <img class="tile-layer tile-result" src="assets/showcase/243_result.jpg" alt="Traditional portrait SAGE-Color result." loading="lazy" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+
+          <figure class="mosaic-tile" style="--delay: -1600ms; --cycle: 7100ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/533_content.jpg" alt="Street portrait content image before color transfer." loading="lazy" />
+              <img class="tile-layer tile-result" src="assets/showcase/533_result.jpg" alt="Street portrait SAGE-Color result." loading="lazy" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+
+          <figure class="mosaic-tile tile-tall" style="--delay: -6100ms; --cycle: 8000ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/004_content.jpg" alt="Mountain portrait content image before color transfer." loading="lazy" />
+              <img class="tile-layer tile-result" src="assets/showcase/004_result.jpg" alt="Mountain portrait SAGE-Color result." loading="lazy" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+
+          <figure class="mosaic-tile" style="--delay: -2600ms; --cycle: 7000ms">
+            <div class="tile-stack">
+              <img class="tile-layer tile-content" src="assets/showcase/102_content.jpg" alt="Studio portrait content image before color transfer." loading="lazy" />
+              <img class="tile-layer tile-result" src="assets/showcase/102_result.jpg" alt="Studio portrait SAGE-Color result." loading="lazy" />
+            </div>
+            <figcaption><span>Content</span><strong>SAGE-Color</strong></figcaption>
+          </figure>
+        </div>
+
+        <div class="reference-lane" aria-label="Reference image examples">
+          <figure>
+            <img src="assets/showcase/830_reference.jpg" alt="Evening street reference image." loading="lazy" />
+            <figcaption>Reference</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/showcase/298_reference.jpg" alt="Bright lake reference image." loading="lazy" />
+            <figcaption>Reference</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/showcase/409_reference.jpg" alt="Warm field reference image." loading="lazy" />
+            <figcaption>Reference</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/showcase/610_reference.jpg" alt="Backlit garden reference image." loading="lazy" />
+            <figcaption>Reference</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/showcase/243_reference.jpg" alt="Blue umbrella reference image." loading="lazy" />
+            <figcaption>Reference</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/showcase/533_reference.jpg" alt="Green umbrella reference image." loading="lazy" />
+            <figcaption>Reference</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section abstract-band">
+        <div class="section-head centered">
+          <p class="eyebrow">Abstract</p>
+          <h2>Reference color as semantic evidence</h2>
+          <p>
+            SAGE-Color treats the reference image as chromatic evidence rather
+            than a spatial template. The content image remains responsible for
+            pose, object boundaries, and layout, while reference appearance is
+            grounded to compatible content regions.
+          </p>
+        </div>
+      </section>
+
+      <section class="section contribution-grid" aria-label="SAGE-Color highlights">
+        <article>
+          <span>01</span>
+          <h3>Semantic Color Gallery</h3>
+          <p>Global, regional, and local reference cues are organized for semantic appearance grounding.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Dense Content Path</h3>
+          <p>Content latents keep the generated image anchored to the original geometry and fine detail.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Intrinsic Preservation Field</h3>
+          <p>Color-free structure cues reduce unsafe residual edits in identity-sensitive regions.</p>
+        </article>
+      </section>
+
+      <section class="section image-story" id="gallery">
+        <div class="section-head centered">
+          <p class="eyebrow">Gallery</p>
+          <h2>Large results, compact evidence</h2>
+          <p>
+            The result is shown at the largest scale. Content and reference
+            inputs stay close enough to make the transfer behavior readable
+            without flattening the layout into equal-sized thumbnails.
+          </p>
+        </div>
+
+        <div class="feature-wall">
+          <article class="feature-case main-case">
+            <figure class="feature-result">
+              <img src="assets/showcase/243_result.jpg" alt="Large SAGE-Color result with blue reference appearance." loading="lazy" />
+              <figcaption>SAGE-Color result</figcaption>
+            </figure>
+            <div class="feature-inputs">
+              <figure>
+                <img src="assets/showcase/243_content.jpg" alt="Content image for the blue reference example." loading="lazy" />
+                <figcaption>Content</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/showcase/243_reference.jpg" alt="Reference image for the blue reference example." loading="lazy" />
+                <figcaption>Reference</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="feature-case portrait-case">
+            <figure class="feature-result">
+              <img src="assets/showcase/253_result.jpg" alt="SAGE-Color result with sunset blossom warmth." loading="lazy" />
+              <figcaption>SAGE-Color result</figcaption>
+            </figure>
+            <div class="feature-inputs">
+              <figure>
+                <img src="assets/showcase/253_content.jpg" alt="Content image for the sunset blossom example." loading="lazy" />
+                <figcaption>Content</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/showcase/253_reference.jpg" alt="Reference image for the sunset blossom example." loading="lazy" />
+                <figcaption>Reference</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="feature-case landscape-case">
+            <figure class="feature-result">
+              <img src="assets/showcase/102_result.jpg" alt="SAGE-Color result with low-key portrait tone." loading="lazy" />
+              <figcaption>SAGE-Color result</figcaption>
+            </figure>
+            <div class="feature-inputs">
+              <figure>
+                <img src="assets/showcase/102_content.jpg" alt="Content image for the portrait tone example." loading="lazy" />
+                <figcaption>Content</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/showcase/102_reference.jpg" alt="Reference image for the portrait tone example." loading="lazy" />
+                <figcaption>Reference</figcaption>
+              </figure>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -201,220 +273,125 @@
         >
           <div class="gallery-viewport" data-gallery-viewport>
             <div class="gallery-track" data-gallery-track>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 8">
-                <div class="gallery-comparison is-portrait">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/298_content.jpg" alt="Lake portrait content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/298_reference.jpg" alt="Bright lake reference portrait." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/298_result.jpg" alt="Lake portrait result with turquoise reference palette." loading="lazy" />
-                    </div>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 6">
+                <div class="triplet-board">
+                  <figure class="input-card">
+                    <img src="assets/showcase/461_content.jpg" alt="Indoor portrait content image." loading="lazy" />
+                    <figcaption>Content</figcaption>
                   </figure>
-                </div>
-                <h3>Turquoise lake transfer</h3>
-                <p>The result adopts the reference water palette while keeping the content subject and lakeshore geometry intact.</p>
-              </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 8">
-                <div class="gallery-comparison is-portrait">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/004_content.jpg" alt="Mountain content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/004_reference.jpg" alt="Warm desert reference portrait." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/004_result.jpg" alt="Mountain result with warm desert reference tone." loading="lazy" />
-                    </div>
+                  <figure class="input-card">
+                    <img src="assets/showcase/461_reference.jpg" alt="Violet grass reference image." loading="lazy" />
+                    <figcaption>Reference</figcaption>
                   </figure>
-                </div>
-                <h3>Mountain palette transfer</h3>
-                <p>A warm desert reference shifts the rocky content scene without copying the reference person or landscape layout.</p>
-              </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 8">
-                <div class="gallery-comparison is-portrait">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/253_content.jpg" alt="Blossom portrait content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/253_reference.jpg" alt="Palm sunset reference image." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/253_result.jpg" alt="Blossom portrait result with sunset reference warmth." loading="lazy" />
-                    </div>
-                  </figure>
-                </div>
-                <h3>Sunset blossom transfer</h3>
-                <p>The output follows the reference warmth while preserving the couple, blossom branches, and vertical composition.</p>
-              </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 8">
-                <div class="gallery-comparison is-portrait">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/610_content.jpg" alt="Garden child content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/610_reference.jpg" alt="Backlit garden child reference image." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/610_result.jpg" alt="Garden child result with bright green reference tone." loading="lazy" />
-                    </div>
-                  </figure>
-                </div>
-                <h3>Garden light transfer</h3>
-                <p>The reference contributes greener, brighter outdoor light while the content pose and foreground flowers stay fixed.</p>
-              </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 8">
-                <div class="gallery-comparison is-portrait">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/461_content.jpg" alt="Indoor portrait content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/461_reference.jpg" alt="Violet sunset grass reference image." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/461_result.jpg" alt="Indoor portrait result with violet sunset reference tone." loading="lazy" />
-                    </div>
+                  <figure class="output-card">
+                    <img src="assets/showcase/461_result.jpg" alt="Indoor portrait result with violet reference tone." loading="lazy" />
+                    <figcaption>SAGE-Color result</figcaption>
                   </figure>
                 </div>
                 <h3>Violet sunset transfer</h3>
                 <p>The reference hue changes the portrait atmosphere while preserving the subject, hands, clothing, and background structure.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 8">
-                <div class="gallery-comparison is-portrait">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/469_content.jpg" alt="Lake portrait content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/469_reference.jpg" alt="Turquoise lake reference portrait." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/469_result.jpg" alt="Lake portrait result with turquoise reference tone." loading="lazy" />
-                    </div>
+
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 6">
+                <div class="triplet-board">
+                  <figure class="input-card">
+                    <img src="assets/showcase/469_content.jpg" alt="Lake portrait content image." loading="lazy" />
+                    <figcaption>Content</figcaption>
+                  </figure>
+                  <figure class="input-card">
+                    <img src="assets/showcase/469_reference.jpg" alt="Turquoise lake reference image." loading="lazy" />
+                    <figcaption>Reference</figcaption>
+                  </figure>
+                  <figure class="output-card">
+                    <img src="assets/showcase/469_result.jpg" alt="Lake portrait result with turquoise reference tone." loading="lazy" />
+                    <figcaption>SAGE-Color result</figcaption>
                   </figure>
                 </div>
                 <h3>Water-color transfer</h3>
                 <p>The result pulls in the turquoise water appearance while keeping the original subject scale and shoreline placement.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="7 of 8">
-                <div class="gallery-comparison is-portrait">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/543_content.jpg" alt="Shoreline portrait content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/543_reference.jpg" alt="Blue beach reference image." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/543_result.jpg" alt="Shoreline portrait result with blue beach reference tone." loading="lazy" />
-                    </div>
+
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 6">
+                <div class="triplet-board">
+                  <figure class="input-card">
+                    <img src="assets/showcase/543_content.jpg" alt="Shoreline portrait content image." loading="lazy" />
+                    <figcaption>Content</figcaption>
+                  </figure>
+                  <figure class="input-card">
+                    <img src="assets/showcase/543_reference.jpg" alt="Blue beach reference image." loading="lazy" />
+                    <figcaption>Reference</figcaption>
+                  </figure>
+                  <figure class="output-card">
+                    <img src="assets/showcase/543_result.jpg" alt="Shoreline portrait result with blue beach reference tone." loading="lazy" />
+                    <figcaption>SAGE-Color result</figcaption>
                   </figure>
                 </div>
                 <h3>Blue-hour shoreline transfer</h3>
                 <p>The reference beach light cools the result while the coastline, figure scale, and horizon remain content-driven.</p>
               </article>
-              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="8 of 8">
-                <div class="gallery-comparison">
-                  <div class="gallery-sources">
-                    <figure>
-                      <span>Content</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/102_content.jpg" alt="Portrait content image." loading="lazy" />
-                      </div>
-                    </figure>
-                    <figure>
-                      <span>Reference</span>
-                      <div class="image-shell">
-                        <img src="assets/showcase/102_reference.jpg" alt="Low-key trumpet reference image." loading="lazy" />
-                      </div>
-                    </figure>
-                  </div>
-                  <figure class="gallery-result">
-                    <span>Result</span>
-                    <div class="image-shell result-shell">
-                      <img src="assets/showcase/102_result.jpg" alt="Portrait color transfer result with studio tone reference." loading="lazy" />
-                    </div>
+
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 6">
+                <div class="triplet-board landscape-output">
+                  <figure class="input-card">
+                    <img src="assets/showcase/409_content.jpg" alt="Outdoor portrait content image." loading="lazy" />
+                    <figcaption>Content</figcaption>
+                  </figure>
+                  <figure class="input-card">
+                    <img src="assets/showcase/409_reference.jpg" alt="Warm field reference image." loading="lazy" />
+                    <figcaption>Reference</figcaption>
+                  </figure>
+                  <figure class="output-card">
+                    <img src="assets/showcase/409_result.jpg" alt="Outdoor portrait result with warm field tone." loading="lazy" />
+                    <figcaption>SAGE-Color result</figcaption>
                   </figure>
                 </div>
-                <h3>Portrait tone transfer</h3>
-                <p>A low-key studio reference changes the lighting mood without changing the face, pose, or veil geometry.</p>
+                <h3>Warm field transfer</h3>
+                <p>Reference warmth moves into the scene while the content face, hat, and pose remain fixed.</p>
+              </article>
+
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 6">
+                <div class="triplet-board landscape-output">
+                  <figure class="input-card">
+                    <img src="assets/showcase/533_content.jpg" alt="Street portrait content image." loading="lazy" />
+                    <figcaption>Content</figcaption>
+                  </figure>
+                  <figure class="input-card">
+                    <img src="assets/showcase/533_reference.jpg" alt="Green umbrella reference image." loading="lazy" />
+                    <figcaption>Reference</figcaption>
+                  </figure>
+                  <figure class="output-card">
+                    <img src="assets/showcase/533_result.jpg" alt="Street portrait result with green reference palette." loading="lazy" />
+                    <figcaption>SAGE-Color result</figcaption>
+                  </figure>
+                </div>
+                <h3>Street palette transfer</h3>
+                <p>The reference palette shifts the scene color language without copying the umbrella or the reference street layout.</p>
+              </article>
+
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 6">
+                <div class="triplet-board">
+                  <figure class="input-card">
+                    <img src="assets/showcase/004_content.jpg" alt="Mountain portrait content image." loading="lazy" />
+                    <figcaption>Content</figcaption>
+                  </figure>
+                  <figure class="input-card">
+                    <img src="assets/showcase/004_reference.jpg" alt="Warm desert reference image." loading="lazy" />
+                    <figcaption>Reference</figcaption>
+                  </figure>
+                  <figure class="output-card">
+                    <img src="assets/showcase/004_result.jpg" alt="Mountain portrait result with warm desert tone." loading="lazy" />
+                    <figcaption>SAGE-Color result</figcaption>
+                  </figure>
+                </div>
+                <h3>Mountain palette transfer</h3>
+                <p>A warm desert reference shifts the rocky content scene without copying the reference person or landscape layout.</p>
               </article>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="figure-section" id="method">
+      <section class="section stacked-section" id="method">
         <div class="section-head">
           <p class="eyebrow">Architecture</p>
           <h2>Semantic appearance grounding</h2>
@@ -438,32 +415,8 @@
         </figure>
       </section>
 
-      <section class="section split">
-        <div>
-          <p class="eyebrow">Method</p>
-          <h2>Color evidence without spatial borrowing</h2>
-          <p>
-            The reference image is treated as chromatic evidence rather than a
-            spatial template. Global, regional, and local appearance cues are
-            grounded by semantic compatibility, while content-only intrinsic
-            cues attenuate unsafe residuals that could corrupt identity or
-            detail.
-          </p>
-        </div>
-        <div class="notes">
-          <div>
-            <strong>Single-checkpoint inference</strong>
-            <span>Use the released final checkpoint with one content image and one reference image.</span>
-          </div>
-          <div>
-            <strong>Two-stage training</strong>
-            <span>Train color grounding first, then continue with the final structure-preserving objective.</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="results">
-        <div class="section-head">
+      <section class="section results-section" id="results">
+        <div class="section-head centered">
           <p class="eyebrow">Evaluation</p>
           <h2>Colorist-Bench-1K results</h2>
           <p>
@@ -524,6 +477,6 @@ bash scripts/final_model/bash/infer.sh</code></pre>
       <span>Licensed under CC BY 4.0.</span>
       <span>Code and checkpoints are public.</span>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?v=ictone-motion"></script>
   </body>
 </html>
