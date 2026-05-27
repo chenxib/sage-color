@@ -1,12 +1,18 @@
 # Project Page Assets
 
-The project page uses only original figure files copied from the provided paper
-package:
+The project page combines paper figures with optimized showcase images.
+
+Paper figures:
 
 ```text
-figures/overview.png
-figures/main_qual_corrected.pdf
-figures/fig1.pdf
+overview.png
+main_qual_corrected.png
+main_qual_corrected.pdf
 ```
 
-PDF figures are rendered to PNG for browser-stable display on the project page.
+Showcase assets under `showcase/` are compressed JPEG panels built from the
+supplemental `new_pic/` content-reference-result examples. They are used by the
+project page teaser, qualitative carousel, and GitHub README preview.
+
+PDF figures are kept only as source/download assets. Browser-visible figures use
+PNG or JPEG images for stable rendering.

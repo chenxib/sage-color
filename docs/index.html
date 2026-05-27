@@ -13,14 +13,14 @@
       property="og:description"
       content="Semantic Appearance Grounding for Reference-Based Color Transfer."
     />
-    <meta property="og:image" content="assets/task_schematic.png" />
+    <meta property="og:image" content="assets/showcase/sage_color_teaser.jpg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="#top">SAGE-Color</a>
-      <nav>
-        <a href="#task">Task</a>
+      <nav aria-label="Project sections">
+        <a href="#gallery">Gallery</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
         <a href="#code">Code</a>
@@ -29,75 +29,146 @@
 
     <main id="top">
       <section class="hero">
-        <div class="hero-copy">
-          <p class="venue">Reference-Based Color Transfer</p>
-          <h1>SAGE-Color</h1>
-          <p class="subtitle">
-            Semantic Appearance Grounding for Reference-Based Color Transfer
-          </p>
-          <p class="abstract">
-            SAGE-Color transfers palette, tone, contrast, and region-level
-            appearance from a reference image while preserving the content
-            image's geometry, identity, and fine structure.
-          </p>
-          <div class="actions">
-            <a class="button primary" href="https://github.com/chenxib/sage-color">GitHub</a>
-            <a class="button" href="https://huggingface.co/chenxib/sage-color">Weights</a>
-            <span class="button disabled" aria-disabled="true">arXiv coming soon</span>
-          </div>
+        <p class="venue">Reference-Based Color Transfer</p>
+        <h1>SAGE-Color</h1>
+        <p class="subtitle">
+          Semantic Appearance Grounding for Reference-Based Color Transfer
+        </p>
+        <p class="hero-text">
+          SAGE-Color transfers palette, tone, contrast, and region-level
+          appearance from a reference image while preserving the content
+          image's geometry, identity, layout, and fine structure.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/chenxib/sage-color">GitHub</a>
+          <a class="button" href="https://huggingface.co/chenxib/sage-color">Weights</a>
+          <span class="button disabled" aria-disabled="true">arXiv coming soon</span>
         </div>
+      </section>
 
-        <figure class="hero-figure">
+      <section class="teaser" aria-label="SAGE-Color visual examples">
+        <figure class="teaser-frame">
           <img
-            src="assets/task_schematic.png"
-            alt="SAGE-Color task schematic showing content image, reference image, transferred result, semantic color grounding, and intrinsic preservation field."
+            src="assets/showcase/sage_color_teaser.jpg"
+            alt="SAGE-Color examples showing content images, reference images, and generated recolored results across portraits, landscapes, night scenes, and street photography."
+            loading="eager"
           />
-          <figcaption>
-            Reference colors are grounded by semantics while content geometry
-            stays fixed.
-          </figcaption>
         </figure>
+        <p class="teaser-caption">
+          Reference images provide appearance. Content images keep structure.
+          The result follows the reference color language without inheriting the
+          reference layout.
+        </p>
       </section>
 
       <section class="signal-strip" aria-label="Release highlights">
         <div>
-          <span>Code</span>
-          <strong>inference + training</strong>
+          <span>Inputs</span>
+          <strong>content image + reference image</strong>
+        </div>
+        <div>
+          <span>Output</span>
+          <strong>recolored image with fixed structure</strong>
         </div>
         <div>
           <span>Weights</span>
-          <strong>final + grounding</strong>
+          <strong>final + grounding checkpoints</strong>
         </div>
         <div>
-          <span>Paper</span>
-          <strong>arXiv coming soon</strong>
-        </div>
-        <div>
-          <span>Task</span>
-          <strong>content-guided color transfer</strong>
+          <span>Release</span>
+          <strong>training and inference scripts</strong>
         </div>
       </section>
 
-      <section class="section split" id="task">
+      <section class="section split" id="gallery">
         <div>
-          <p class="eyebrow">Problem</p>
-          <h2>Color transfer without layout transfer</h2>
+          <p class="eyebrow">Visual Gallery</p>
+          <h2>Reference appearance, content structure</h2>
           <p>
-            Reference images contain useful palette, tone, contrast, and
-            region-level appearance, but they also contain their own geometry.
-            SAGE-Color separates these two roles: the content image keeps
-            spatial authority, while the reference image supplies appearance
-            evidence.
+            The gallery highlights the central behavior of SAGE-Color: the
+            output inherits chromatic evidence from the reference image while
+            retaining the pose, object boundaries, layout, and fine detail of
+            the content image.
           </p>
         </div>
         <div class="notes">
           <div>
-            <strong>Semantic color grounding</strong>
-            <span>Reference colors are matched to content regions instead of copied by position.</span>
+            <strong>No layout leakage</strong>
+            <span>Reference color is transferred without copying reference geometry.</span>
           </div>
           <div>
-            <strong>Intrinsic preservation field</strong>
-            <span>Content-only structure cues protect regions where color residuals could corrupt identity or detail.</span>
+            <strong>Semantic appearance grounding</strong>
+            <span>Global, regional, and local color cues are assigned to compatible content regions.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-shell" aria-label="SAGE-Color qualitative examples">
+        <div class="gallery-header">
+          <div>
+            <p class="eyebrow">Qualitative Examples</p>
+            <h2>Cross-scene color transfer</h2>
+          </div>
+          <div class="gallery-controls">
+            <button class="icon-button" type="button" data-gallery-prev aria-label="Previous example">
+              <span aria-hidden="true">&#8249;</span>
+            </button>
+            <div class="gallery-dots" data-gallery-dots></div>
+            <button class="icon-button" type="button" data-gallery-next aria-label="Next example">
+              <span aria-hidden="true">&#8250;</span>
+            </button>
+          </div>
+        </div>
+        <div
+          class="gallery-carousel"
+          data-gallery-carousel
+          tabindex="0"
+          aria-roledescription="carousel"
+          aria-label="SAGE-Color qualitative examples"
+        >
+          <div class="gallery-viewport" data-gallery-viewport>
+            <div class="gallery-track" data-gallery-track>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 8">
+                <img src="assets/showcase/case_004.jpg" alt="Mountain scene color transfer example." loading="lazy" />
+                <h3>Landscape palette transfer</h3>
+                <p>A barren-land reference warms the rocky content scene while preserving the figure and terrain structure.</p>
+              </article>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 8">
+                <img src="assets/showcase/case_102.jpg" alt="Portrait color transfer example with studio tone reference." loading="lazy" />
+                <h3>Portrait tone transfer</h3>
+                <p>A low-key studio reference changes the lighting mood without changing the face, pose, or veil geometry.</p>
+              </article>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 8">
+                <img src="assets/showcase/case_243.jpg" alt="Blue night umbrella reference transferred to a garden portrait." loading="lazy" />
+                <h3>Night atmosphere transfer</h3>
+                <p>A dark blue reference shifts the scene into a cooler night-like appearance while the content layout remains stable.</p>
+              </article>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 8">
+                <img src="assets/showcase/case_409.jpg" alt="Warm field reference transferred to a portrait scene." loading="lazy" />
+                <h3>Warm outdoor transfer</h3>
+                <p>The result absorbs the warm field palette while keeping the content subject, hat, and foreground strands intact.</p>
+              </article>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 8">
+                <img src="assets/showcase/case_461.jpg" alt="Sunset grass reference transferred to a portrait scene." loading="lazy" />
+                <h3>Sunset color grounding</h3>
+                <p>Reference warmth and violet shadows are mapped into compatible regions without flattening the content details.</p>
+              </article>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 8">
+                <img src="assets/showcase/case_533.jpg" alt="Green umbrella reference transferred to a street portrait." loading="lazy" />
+                <h3>Transparent-object consistency</h3>
+                <p>The umbrella and surrounding foliage receive reference-compatible tones while object boundaries remain readable.</p>
+              </article>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="7 of 8">
+                <img src="assets/showcase/case_543.jpg" alt="Blue beach reference transferred to a coastal portrait." loading="lazy" />
+                <h3>Cool coastal transfer</h3>
+                <p>The reference's blue cast is applied to the content scene without changing the person or shoreline structure.</p>
+              </article>
+              <article class="gallery-slide" role="group" aria-roledescription="slide" aria-label="8 of 8">
+                <img src="assets/showcase/case_830.jpg" alt="Evening street reference transferred to a crosswalk portrait." loading="lazy" />
+                <h3>Street-scene recoloring</h3>
+                <p>The model follows the evening reference tone while preserving the crosswalk, sign, and subject geometry.</p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -107,33 +178,35 @@
           <p class="eyebrow">Architecture</p>
           <h2>Semantic appearance grounding</h2>
           <p>
-            The final model combines a dense content path, a reference
-            appearance lane, and a structure-preservation lane inside an MMDiT
-            flow editor.
+            SAGE-Color separates dense content conditioning, reference
+            appearance grounding, and content-only structure preservation inside
+            an MMDiT flow editor.
           </p>
         </div>
-        <figure>
+        <figure class="paper-figure">
           <img
             src="assets/overview.png"
             alt="SAGE-Color architecture overview showing the content path, Semantic Color Gallery, and Intrinsic Preservation Field."
+            loading="lazy"
           />
           <figcaption>
-            SAGE-Color separates dense content conditioning, reference color
-            grounding, and content-only structure preservation.
+            Dense content conditioning anchors layout, the Semantic Color
+            Gallery supplies reference appearance, and the Intrinsic Preservation
+            Field protects structure-sensitive regions.
           </figcaption>
         </figure>
       </section>
 
       <section class="section split">
         <div>
-          <p class="eyebrow">Model</p>
-          <h2>Method</h2>
+          <p class="eyebrow">Method</p>
+          <h2>Color evidence without spatial borrowing</h2>
           <p>
-            The content image provides spatial authority through latent
-            concatenation. The reference image is converted into a Semantic Color
-            Gallery with global, regional, and local chromatic evidence. A
-            content-only Intrinsic Preservation Field attenuates unsafe reference
-            residuals in structure-sensitive regions.
+            The reference image is treated as chromatic evidence rather than a
+            spatial template. Global, regional, and local appearance cues are
+            grounded by semantic compatibility, while content-only intrinsic
+            cues attenuate unsafe residuals that could corrupt identity or
+            detail.
           </p>
         </div>
         <div class="notes">
@@ -142,8 +215,8 @@
             <span>Use the released final checkpoint with one content image and one reference image.</span>
           </div>
           <div>
-            <strong>Recommended training</strong>
-            <span>Train color grounding first, then continue training the final structure-preserving model.</span>
+            <strong>Two-stage training</strong>
+            <span>Train color grounding first, then continue with the final structure-preserving objective.</span>
           </div>
         </div>
       </section>
@@ -151,10 +224,10 @@
       <section class="section" id="results">
         <div class="section-head">
           <p class="eyebrow">Evaluation</p>
-          <h2>Results</h2>
+          <h2>Colorist-Bench-1K results</h2>
           <p>
-            On Colorist-Bench-1K, SAGE-Color improves reference color fidelity
-            while keeping content-compatible reconstruction.
+            SAGE-Color improves reference color fidelity while keeping
+            content-compatible reconstruction.
           </p>
         </div>
         <div class="metrics">
@@ -163,14 +236,15 @@
           <div><strong>0.984</strong><span>DINO-T up</span></div>
           <div><strong>95.33</strong><span>FG-CES up</span></div>
         </div>
-        <figure class="result-figure">
+        <figure class="paper-figure">
           <img
             src="assets/main_qual_corrected.png"
             alt="Qualitative comparison for reference-based color transfer."
+            loading="lazy"
           />
           <figcaption>
-            Qualitative comparison on reference-based color transfer. SAGE-Color
-            follows the reference appearance while preserving content structure.
+            Paper qualitative comparison. SAGE-Color follows reference
+            appearance while preserving content structure.
           </figcaption>
         </figure>
       </section>
@@ -209,5 +283,6 @@ bash scripts/final_model/bash/infer.sh</code></pre>
       <span>Licensed under CC BY 4.0.</span>
       <span>Code and checkpoints are public.</span>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>

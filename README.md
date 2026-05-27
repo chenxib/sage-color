@@ -25,7 +25,11 @@ reference image supplies appearance.
 </p>
 
 <p align="center">
-  <img src="docs/assets/task_schematic.png" alt="SAGE-Color task schematic" width="96%">
+  <img src="docs/assets/showcase/sage_color_readme_showcase.jpg" alt="SAGE-Color examples showing content images, reference images, and generated recolored results." width="96%">
+</p>
+
+<p align="center">
+  <em>Content image -> reference image -> SAGE-Color result. The reference controls appearance; the content image keeps structure.</em>
 </p>
 
 ## At a Glance
@@ -150,7 +154,7 @@ The model separates the problem into three paths:
   from achromatic statistics, depth, and optional segmentation/panoptic priors
   to protect structure-sensitive regions.
 
-The full architecture and qualitative results are shown on the
+The visual gallery, full architecture, and qualitative results are shown on the
 [project page](https://chenxib.github.io/sage-color/).
 
 ## Data Format
