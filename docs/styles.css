@@ -11,7 +11,7 @@
   --teal: #176e73;
   --moss: #4f6b3b;
   --amber: #bf7b2c;
-  --teaser-cycle: 6200ms;
+  --teaser-cycle: 4000ms;
   --shadow: 0 20px 46px rgba(25, 39, 34, 0.13);
   --shadow-soft: 0 10px 24px rgba(25, 39, 34, 0.09);
 }
