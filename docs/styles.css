@@ -278,15 +278,41 @@ h3 {
 }
 
 .mosaic-tile .tile-content {
-  animation: content-swap var(--cycle) ease-in-out var(--delay) infinite;
+  animation: content-swap 1600ms cubic-bezier(0.4, 0, 0.2, 1) var(--delay) infinite;
 }
 
 .mosaic-tile .tile-result {
-  animation: result-swap var(--cycle) ease-in-out var(--delay) infinite;
+  animation: result-swap 1600ms cubic-bezier(0.4, 0, 0.2, 1) var(--delay) infinite;
+}
+
+.tile-reference {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
+  width: clamp(92px, 34%, 156px);
+  aspect-ratio: 1 / 1;
+  border: 4px solid #ffffff;
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: 0 18px 34px rgba(15, 22, 20, 0.24);
+  object-fit: cover;
+  opacity: 0;
+  transform: translate(-28%, 28%) scale(0.72);
+  transform-origin: left bottom;
+  will-change: transform, opacity;
+  animation: reference-pop 1600ms cubic-bezier(0.24, 0.78, 0.22, 1) var(--delay) infinite;
+}
+
+.tile-tall .tile-reference {
+  width: clamp(86px, 42%, 148px);
+}
+
+.tile-wide .tile-reference {
+  width: clamp(118px, 30%, 170px);
 }
 
 .mosaic-tile figcaption,
-.reference-lane figcaption,
 .feature-case figcaption,
 .triplet-board figcaption {
   color: var(--muted);
@@ -297,34 +323,6 @@ h3 {
 
 .mosaic-tile figcaption {
   display: none;
-}
-
-.reference-lane {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.reference-lane figure {
-  margin: 0;
-  padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--paper);
-  box-shadow: 0 6px 18px rgba(25, 39, 34, 0.07);
-}
-
-.reference-lane img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: 6px;
-  object-fit: contain;
-  background: #f3f5f4;
-}
-
-.reference-lane figcaption {
-  margin-top: 7px;
 }
 
 .section {
@@ -712,12 +710,12 @@ footer {
 
 @keyframes content-swap {
   0%,
-  42% {
+  28% {
     opacity: 1;
   }
 
-  52%,
-  88% {
+  42%,
+  82% {
     opacity: 0;
   }
 
@@ -728,17 +726,47 @@ footer {
 
 @keyframes result-swap {
   0%,
-  42% {
+  34% {
     opacity: 0;
   }
 
-  52%,
-  88% {
+  48%,
+  78% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes reference-pop {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translate(-28%, 28%) scale(0.72);
+  }
+
+  24% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1.08);
+  }
+
+  31% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.96);
+  }
+
+  38%,
+  76% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  88%,
+  100% {
+    opacity: 0;
+    transform: translate(-18%, 18%) scale(0.78);
   }
 }
 
@@ -750,6 +778,7 @@ footer {
   .mosaic-tile,
   .mosaic-tile .tile-content,
   .mosaic-tile .tile-result,
+  .mosaic-tile .tile-reference,
   .gallery-track {
     animation: none;
     transition: none;
@@ -767,6 +796,11 @@ footer {
   .tile-result {
     opacity: 1;
   }
+
+  .tile-reference {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 980px) {
@@ -780,7 +814,6 @@ footer {
     grid-column: span 2;
   }
 
-  .reference-lane,
   .contribution-grid,
   .metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -955,7 +988,6 @@ footer {
     grid-row: span 2;
   }
 
-  .reference-lane,
   .contribution-grid,
   .metrics,
   .triplet-board {
