@@ -25,7 +25,7 @@ reference image supplies appearance.
 </p>
 
 <p align="center">
-  <img src="docs/assets/showcase/readme_showcase.gif" alt="SAGE-Color animated showcase with lower-left reference cards and split-line result reveal." width="96%">
+  <img src="docs/assets/showcase/readme_showcase.webp" alt="SAGE-Color animated showcase with lower-left reference cards and split-line result reveal." width="96%">
 </p>
 
 <p align="center">
